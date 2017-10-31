@@ -1,0 +1,29 @@
+1.why we override clone method?
+
+2.JVM architecture?
+https://dzone.com/articles/jvm-architecture-explained
+
+3.shutdown hook?
+The shutdown hook can be used to perform cleanup resource or save the state when JVM shuts down normally or abruptly. Performing clean resource means closing log file, sending some alerts or something else. So if you want to execute some code before JVM shuts down, use shutdown hook.
+The JVM shuts down when:
+	user presses ctrl+c on the command prompt
+    System.exit(int) method is invoked
+    user logoff
+    user shutdown etc.
+Ex:
+	main()
+	{
+		Runtime r=Runtime.getRuntime();  
+		r.addShutdownHook(new MyThread());   //  In Run Method of MyThread class we can perform cleanup resource
+	}
+
+4.JVM JDK JRE
+5.CPP vs JAVA
+6.Aggregation vs Composition vs Inheritance (Benifits of composition over inheritance)
+7.Class vs Heap vs Stack vs PCR vs Native mathode stack
+8.Virtual Funtion
+9.JIT compiler
+10.Imuutable
+
+11.generics
+https://www.journaldev.com/1663/java-generics-example-method-class-interface
