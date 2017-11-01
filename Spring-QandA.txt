@@ -1,12 +1,3 @@
-Doubts :
-springtoolsuit
-AOP
-Spring MVC architecture
-cross-cutting tasks
-What is Aspect, Advice, Pointcut, JointPoint and Advice Arguments in 
-
-
-
 1.What is Spring Framework?
 Spring is one of the most widely used Java EE framework. Spring framework core concepts are “Dependency Injection” and “Aspect Oriented Programming”.
 Spring framework can be used in normal java applications also to achieve loose coupling between different components by implementing dependency injection and we can perform cross cutting tasks such as logging and authentication using spring support for aspect oriented programming.
@@ -90,19 +81,17 @@ Some of the advantages of using Spring Framework are:
         FileSystemXmlApplicationContext: Similar to ClassPathXmlApplicationContext except that the xml configuration file can be loaded from anywhere in the file system.
         AnnotationConfigWebApplicationContext and XmlWebApplicationContext for web applications.
 
-    What is a Spring Bean?
+10.What is a Spring Bean?
 
     Any normal java class that is initialized by Spring IoC container is called Spring Bean. We use Spring ApplicationContext to get the Spring Bean instance.
+	Spring IoC container manages the life cycle of Spring Bean, bean scopes and injecting any required dependencies in the bean.
 
-    Spring IoC container manages the life cycle of Spring Bean, bean scopes and injecting any required dependencies in the bean.
-
-    What is the importance of Spring bean configuration file?
+11.What is the importance of Spring bean configuration file?
 
     We use Spring Bean configuration file to define all the beans that will be initialized by Spring Context. When we create the instance of Spring ApplicationContext, it reads the spring bean xml file and initialize all of them. Once the context is initialized, we can use it to get different bean instances.
+	Apart from Spring Bean configuration, this file also contains spring MVC interceptors, view resolvers and other elements to support annotations based configurations.
 
-    Apart from Spring Bean configuration, this file also contains spring MVC interceptors, view resolvers and other elements to support annotations based configurations.
-
-    What are different ways to configure a class as Spring Bean?
+12.What are different ways to configure a class as Spring Bean?
 
     There are three different ways to configure Spring Bean.
         XML Configuration: This is the most popular configuration and we can use bean element in context file to configure a Spring Bean. For example:
@@ -131,7 +120,7 @@ Some of the advantages of using Spring Framework are:
 
         <context:component-scan base-package="com.journaldev.spring" />
 
-    What are different scopes of Spring Bean?
+13.What are different scopes of Spring Bean?
 
     There are five scopes defined for Spring Beans.
         singleton: Only one instance of the bean will be created for each container. This is the default scope for the spring beans. While using this scope, make sure spring bean doesn’t have shared instance variables otherwise it might lead to data inconsistency issues because it’s not thread-safe.
@@ -144,13 +133,13 @@ Some of the advantages of using Spring Framework are:
 
     To set spring bean scopes we can use “scope” attribute in bean element or @Scope annotation for annotation based configurations.
 
-    What is Spring Bean life cycle?
+14.What is Spring Bean life cycle?
 
     Spring Beans are initialized by Spring Container and all the dependencies are also injected. When context is destroyed, it also destroys all the initialized beans. This works well in most of the cases but sometimes we want to initialize other resources or do some validation before making our beans ready to use. Spring framework provides support for post-initialization and pre-destroy methods in spring beans.
 
-    We can do this by two ways – by implementing InitializingBean and DisposableBean interfaces or using init-method and destroy-method attribute in spring bean configurations. For more details, please read Spring Bean Life Cycle Methods.
+    We can do this by two ways – by implementing InitializingBean and DisposableBean interfaces or using init-method and destroy-method attribute in spring bean configurations.
 
-    How to get ServletContext and ServletConfig object in a Spring Bean?
+15.How to get ServletContext and ServletConfig object in a Spring Bean?
 
     There are two ways to get Container specific objects in the spring bean.
         Implementing Spring *Aware interfaces, for these ServletContextAware and ServletConfigAware interfaces, for complete example of these aware interfaces, please read Spring Aware Interfaces
@@ -159,15 +148,12 @@ Some of the advantages of using Spring Framework are:
         @Autowired
         ServletContext servletContext;
 
-    What is Bean wiring and @Autowired annotation?
+16.What is Bean wiring and @Autowired annotation?
 
     The process of injection spring bean dependencies while initializing it called Spring Bean Wiring.
 
     Usually it’s best practice to do the explicit wiring of all the bean dependencies, but spring framework also supports autowiring. We can use @Autowired annotation with fields or methods for autowiring byType. For this annotation to work, we also need to enable annotation based configuration in spring bean configuration file. This can be done by context:annotation-config element.
-
-    For more details about @Autowired annotation, please read Spring Autowire Example.
-
-    What are different types of Spring Bean autowiring?
+	What are different types of Spring Bean autowiring?
 
     There are four types of autowiring in Spring framework.
         autowire byName
@@ -177,19 +163,19 @@ Some of the advantages of using Spring Framework are:
 
     Prior to Spring 3.1, autowire by autodetect was also supported that was similar to autowire by constructor or byType. For more details about these options, please read Spring Bean Autowiring.
 
-    Does Spring Bean provide thread safety?
+17.Does Spring Bean provide thread safety?
 
     The default scope of Spring bean is singleton, so there will be only one instance per context. That means that all the having a class level variable that any thread can update will lead to inconsistent data. Hence in default mode spring beans are not thread-safe.
 
     However we can change spring bean scope to request, prototype or session to achieve thread-safety at the cost of performance. It’s a design decision and based on the project requirements.
 
-    What is a Controller in Spring MVC?
+18.What is a Controller in Spring MVC?
 
     Just like MVC design pattern, Controller is the class that takes care of all the client requests and send them to the configured resources to handle it. In Spring MVC, org.springframework.web.servlet.DispatcherServlet is the front controller class that initializes the context based on the spring beans configurations.
 
     A Controller class is responsible to handle different kind of client requests based on the request mappings. We can create a controller class by using @Controller annotation. Usually it’s used with @RequestMapping annotation to define handler methods for specific URI mapping.
 
-    What’s the difference between @Component, @Controller, @Repository & @Service annotations in Spring?
+19.What’s the difference between @Component, @Controller, @Repository & @Service annotations in Spring?
 
     @Component is used to indicate that a class is a component. These classes are used for auto detection and configured as bean, when annotation based configurations are used.
 
@@ -201,13 +187,13 @@ Some of the advantages of using Spring Framework are:
 
     We can use any of the above annotations for a class for auto-detection but different types are provided so that you can easily distinguish the purpose of the annotated classes.
 
-    What is DispatcherServlet and ContextLoaderListener?
+20.What is DispatcherServlet and ContextLoaderListener?
 
     DispatcherServlet is the front controller in the Spring MVC application and it loads the spring bean configuration file and initialize all the beans that are configured. If annotations are enabled, it also scans the packages and configure any bean annotated with @Component, @Controller, @Repository or @Service annotations.
 
     ContextLoaderListener is the listener to start up and shut down Spring’s root WebApplicationContext. It’s important functions are to tie up the lifecycle of ApplicationContext to the lifecycle of the ServletContext and to automate the creation of ApplicationContext. We can use it to define shared beans that can be used across different spring contexts.
 
-    What is ViewResolver in Spring?
+21.What is ViewResolver in Spring?
 
     ViewResolver implementations are used to resolve the view pages by name. Usually we configure it in the spring bean configuration file. For example:
 
@@ -219,13 +205,13 @@ Some of the advantages of using Spring Framework are:
 
     InternalResourceViewResolver is one of the implementation of ViewResolver interface and we are providing the view pages directory and suffix location through the bean properties. So if a controller handler method returns “home”, view resolver will use view page located at /WEB-INF/views/home.jsp.
 
-    What is a MultipartResolver and when its used?
+22.What is a MultipartResolver and when its used?
 
     MultipartResolver interface is used for uploading files – CommonsMultipartResolver and StandardServletMultipartResolver are two implementations provided by spring framework for file uploading. By default there are no multipart resolvers configured but to use them for uploading files, all we need to define a bean named “multipartResolver” with type as MultipartResolver in spring bean configurations.
 
     Once configured, any multipart request will be resolved by the configured MultipartResolver and pass on a wrapped HttpServletRequest. Then it’s used in the controller class to get the file and process it. For a complete example, please read Spring MVC File Upload Example.
 
-    How to handle exceptions in Spring MVC Framework?
+23.How to handle exceptions in Spring MVC Framework?
 
     Spring MVC Framework provides following ways to help us achieving robust exception handling.
         Controller Based – We can define exception handler methods in our controller classes. All we need is to annotate these methods with @ExceptionHandler annotation.
@@ -234,14 +220,14 @@ Some of the advantages of using Spring Framework are:
 
     For a complete example, please read Spring Exception Handling Example.
 
-    How to create ApplicationContext in a Java Program?
+24.How to create ApplicationContext in a Java Program?
 
     There are following ways to create spring context in a standalone java program.
         AnnotationConfigApplicationContext: If we are using Spring in standalone java applications and using annotations for Configuration, then we can use this to initialize the container and get the bean objects.
         ClassPathXmlApplicationContext: If we have spring bean configuration xml file in standalone application, then we can use this class to load the file and get the container object.
         FileSystemXmlApplicationContext: This is similar to ClassPathXmlApplicationContext except that the xml configuration file can be loaded from anywhere in the file system.
 
-    Can we have multiple Spring configuration files?
+25.Can we have multiple Spring configuration files?
 
     For Spring MVC applications, we can define multiple spring context configuration files through contextConfigLocation. This location string can consist of multiple locations separated by any number of commas and spaces. For example;
 
@@ -266,7 +252,7 @@ Some of the advantages of using Spring Framework are:
 
     <beans:import resource="spring-jdbc.xml"/>
 
-    What is ContextLoaderListener?
+26.What is ContextLoaderListener?
 
     ContextLoaderListener is the listener class used to load root context and define spring bean configurations that will be visible to all other contexts. It’s configured in web.xml file as:
 
@@ -279,7 +265,7 @@ Some of the advantages of using Spring Framework are:
     	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    What are the minimum configurations needed to create Spring MVC application?
+27.What are the minimum configurations needed to create Spring MVC application?
 
     For creating a simple Spring MVC application, we would need to do following tasks.
         Add spring-context and spring-webmvc dependencies in the project.
@@ -296,7 +282,7 @@ Some of the advantages of using Spring Framework are:
 
     View Pages can be JSP, static HTMLs etc. and view resolvers are responsible for finding the correct view page. Once the view page is identified, control is given back to the DispatcherServlet controller. DispatcherServlet is responsible for rendering the view and returning the final response to the client.
 
-    How to achieve localization in Spring MVC applications?
+28.How to achieve localization in Spring MVC applications?
 
     Spring provides excellent support for localization or i18n through resource bundles. Basis steps needed to make our application localized are:
         Creating message resource bundles for different locales, such as messages_en.properties, messages_fr.properties etc.
@@ -326,7 +312,7 @@ Some of the advantages of using Spring Framework are:
 
     For a complete example, please read Spring Localization Example.
 
-    How can we use Spring to create Restful Web Service returning JSON response?
+29.How can we use Spring to create Restful Web Service returning JSON response?
 
     We can use Spring Framework to create Restful web services that returns JSON data. Spring provides integration with Jackson JSON API that we can use to send JSON response in restful web service.
 
@@ -368,7 +354,7 @@ Some of the advantages of using Spring Framework are:
 
     For a complete example, please read Spring Restful Webservice Example.
 
-    What are some of the important Spring annotations you have used?
+30.What are some of the important Spring annotations you have used?
 
     Some of the Spring annotations that I have used in my project are:
         @Controller – for controller classes in Spring MVC project.
@@ -382,21 +368,21 @@ Some of the advantages of using Spring Framework are:
         @Configuration, @ComponentScan and @Bean – for java based configurations.
         AspectJ annotations for configuring aspects and advices, @Aspect, @Before, @After, @Around, @Pointcut etc.
 
-    Can we send an Object as the response of Controller handler method?
+31.Can we send an Object as the response of Controller handler method?
 
     Yes we can, using @ResponseBody annotation. This is how we send JSON or XML based response in restful web services.
 
-    How to upload file in Spring MVC Application?
+32.How to upload file in Spring MVC Application?
 
     Spring provides built-in support for uploading files through MultipartResolver interface implementations. It’s very easy to use and requires only configuration changes to get it working. Obviously we would need to write controller handler method to handle the incoming file and process it. For a complete example, please refer Spring File Upload Example.
 
-    How to validate form data in Spring Web MVC Framework?
+33.How to validate form data in Spring Web MVC Framework?
 
     Spring supports JSR-303 annotation based validations as well as provide Validator interface that we can implement to create our own custom validator. For using JSR-303 based validation, we need to annotate bean variables with the required validations.
 
     For custom validator implementation, we need to configure it in the controller class. For a complete example, please read Spring MVC Form Validation Example.
 
-    What is Spring MVC Interceptor and how to use it?
+34.What is Spring MVC Interceptor and how to use it?
 
     Spring MVC Interceptors are like Servlet Filters and allow us to intercept client request and process it. We can intercept client request at three places – preHandle, postHandle and afterCompletion.
 
@@ -404,13 +390,13 @@ Some of the advantages of using Spring Framework are:
 
     We need to configure interceptors in the spring bean configuration file. We can define an interceptor to intercept all the client requests or we can configure it for specific URI mapping too. For a detailed example, please refer Spring MVC Interceptor Example.
 
-    What is Spring JdbcTemplate class and how to use it?
+35.What is Spring JdbcTemplate class and how to use it?
 
     Spring Framework provides excellent integration with JDBC API and provides JdbcTemplate utility class that we can use to avoid bolier-plate code from our database operations logic such as Opening/Closing Connection, ResultSet, PreparedStatement etc.
 
     For JdbcTemplate example, please refer Spring JDBC Example.
 
-    How to use Tomcat JNDI DataSource in Spring Web Application?
+36.How to use Tomcat JNDI DataSource in Spring Web Application?
 
     For using servlet container configured JNDI DataSource, we need to configure it in the spring bean configuration file and then inject it to spring beans as dependencies. Then we can use it with JdbcTemplate to perform database operations.
 
@@ -422,7 +408,7 @@ Some of the advantages of using Spring Framework are:
 
     For complete example, please refer Spring Tomcat JNDI Example.
 
-    How would you achieve Transaction Management in Spring?
+37.How would you achieve Transaction Management in Spring?
 
     Spring framework provides transaction management support through Declarative Transaction Management as well as programmatic transaction management. Declarative transaction management is most widely used because it’s easy to use and works in most of the cases.
 
@@ -433,13 +419,13 @@ Some of the advantages of using Spring Framework are:
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    What is Spring DAO?
+38.What is Spring DAO?
 
     Spring DAO support is provided to work with data access technologies like JDBC, Hibernate in a consistent and easy way. For example we have JdbcDaoSupport, HibernateDaoSupport, JdoDaoSupport and JpaDaoSupport for respective technologies.
 
     Spring DAO also provides consistency in exception hierarchy and we don’t need to catch specific exceptions.
 
-    How to integrate Spring and Hibernate Frameworks?
+39.How to integrate Spring and Hibernate Frameworks?
 
     We can use Spring ORM module to integrate Spring and Hibernate frameworks, if you are using Hibernate 3+ where SessionFactory provides current session, then you should avoid using HibernateTemplate or HibernateDaoSupport classes and better to use DAO pattern with dependency injection for the integration.
 
@@ -449,7 +435,7 @@ Some of the advantages of using Spring Framework are:
         Spring Hibernate Integration Example
         Spring MVC Hibernate Integration Example
 
-    What is Spring Security?
+40.What is Spring Security?
 
     Spring security framework focuses on providing both authentication and authorization in java applications. It also takes care of most of the common security vulnerabilities such as CSRF attack.
 
@@ -457,7 +443,7 @@ Some of the advantages of using Spring Framework are:
         Spring Security in Servlet Web Application
         Spring MVC and Spring Security Integration Example
 
-    How to inject a java.util.Properties into a Spring Bean?
+41.How to inject a java.util.Properties into a Spring Bean?
 
     We need to define propertyConfigurer bean that will load the properties from the given property file. Then we can use Spring EL support to inject properties into other bean dependencies. For example;
 
@@ -475,7 +461,7 @@ Some of the advantages of using Spring Framework are:
     @Value("${maxReadResults}") 
     private int maxReadResults;
 
-    Name some of the design patterns used in Spring Framework?
+42.Name some of the design patterns used in Spring Framework?
 
     Spring Framework is using a lot of design patterns, some of the common ones are:
         Singleton Pattern: Creating beans with default scope.
@@ -488,7 +474,7 @@ Some of the advantages of using Spring Framework are:
         Data Access Object: Spring DAO support
         Dependency Injection and Aspect Oriented Programming
 
-    What are some of the best practices for Spring Framework?
+43.What are some of the best practices for Spring Framework?
 
     Some of the best practices for Spring Framework are:
         Avoid version numbers in schema reference, to make sure we have the latest configs.
@@ -501,5 +487,3 @@ Some of the advantages of using Spring Framework are:
         Spring framework has a lot of modules, use what you need. Remove all the extra dependencies that gets usually added when you create projects through Spring Tool Suite templates.
         If you are using Aspects, make sure to keep the join pint as narrow as possible to avoid advice on unwanted methods. Consider custom annotations that are easier to use and avoid any issues.
         Use dependency injection when there is actual benefit, just for the sake of loose-coupling don’t use it because it’s harder to maintain.
-
-That’s all for Spring Framework interview questions. I hope these questions will help you in coming Java EE interview. I will keep on adding more questions to the list as soon as I found them. If you know some more questions that should be part of the list, make sure to add a comment for it and I will include it.
