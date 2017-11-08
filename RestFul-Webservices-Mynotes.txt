@@ -1,0 +1,561 @@
+ 1) What is REST and RESTful web services ?
+ Anyway REST stands for REpresentational State Transfer (REST) its a relatively new concept of writing web services which enforces a stateless client server design where web services are treated as resource and can be accessed and identified by there URL unlike SOAP web services which were defined by WSDL.
+
+Web services written by apply REST Architectural concept are called RESTful web services which focus on System resources and how state of Resource should be transferred over http protocol to a different clients written in different languages. In RESTful web services http methods like GET, PUT, POST and DELETE can can be used to perform CRUD operations.
+
+
+3) What are the advantages of web services?
+    It is available over the Internet or private (intranet) networks.
+    It is not tied to any one operating system or programming language.
+    Interoperability: By the help of web services, an application can communicate with other application developed in any language.
+    Reusability: We can expose the web service so that other applications can use it.
+    Modularity: By the help of web service, we can create a service for a specific task such as tax calculation etc.
+	Lightweight : Easy to consume from mobile devices also.
+    Easy to expose : Little or no restrictions on output format and communication protocol.
+    Most Restful services use HTTP protocol : Entire web is based on HTTP and is built for efficiency of HTTP. Things like HTTP caching enable Restful services to be effective.
+    High Performance : Less xml & soap overhead and More caching enable Restful services to be highly performant.
+
+What are important constraints for a RESTful Web Service?
+The five important constraints for RESTful Web Service are
+uniform isolation stateless scalability
+    Client - Server : There should be a service producer and a service consumer.
+   
+    The service is stateless. Even if the service is called 10 times, the result must be the same.
+    The service result should be Cacheable. HTTP cache, for example. In client-server communication, the HTTP response should be cacheable so that when required cached copy can be used which in turn enhances the scalability and performance of the server.
+    Service should assume a Layered architecture. Client should not assume direct connection to server - it might be getting info from a middle layer - cache..
+	Every constraint has positive as well as negative impacts and to produce an overall architecture, there should be the balance between both of them. Below mentioned are some important constraints for RESTful web service:
+	There should be separate concerns for each server and client which will help to maintain the modularity within the application. This will also reduce the complexity and increase the scalability.
+	The client-server communication should be stateless, which means no previous information is used and the complete execution is done in isolation. In cases of failure, it also helps the client to recover.
+	The fourth constraint is the uniform interface which allows client-server interaction to be easily understood. This constraint is further divided into four sub-constraints as:
+        Resource Identification
+        Resource manipulation
+        Each message is easily understood and is self-descriptive.
+        Hypermedia, which is defined as the text with hyperlinks and when clicked it moves to another application state.
+		 The interface (URL) is uniform and exposing resources. Interface uses nouns (not actions)
+		 
+What are the best practices in using HTTP methods with Restful Web Services?
+	GET : Should not update anything. Should be idempotent (same result in multiple calls). Possible Return Codes 200 (OK) + 404 (NOT FOUND) +400 (BAD REQUEST)
+    POST : Should create new resource. Ideally return JSON with link to newly created resource. Same return codes as get possible. In addition : Return code 201 (CREATED) is possible.
+    PUT : Update a known resource. ex: update client details. Possible Return Codes : 200(OK)
+    DELETE : Used to delete a resource.
+
+Enlist some of the HTTP methods with description.
+    GET: This is a read only operation which fetches the list of users on the server.
+    PUT: This operation is used for the creation of any new resource on the server.
+    POST: This operation is used for updating an old resource or for creating a new resource.
+    DELETE: As the name suggests, this operation is used for deleting any resource on the server.
+    OPTIONS: This operation fetches the list of any supported options of resources that are available on the server.
+	HEAD: About the request URL it returns meta information
+	
+4. What is a resource?
+The key abstraction of information in REST is a resource. Any information that can be named can be a resource like Student, Employee etc. REST is resource based API. Expose resources through URIs like http://localhost:8080/api/employees/1111, It is based on Model nouns, not verbs. Resources support limited set of operations – GET, PUT, POST, DELETE in case of HTTP. Example: update an employee use PUT to /employees/1111 and don’t POST to /employees/edit?id=1111 and Resources can support multiple representations like HTML, XML, JSON etc. Multiple URIs may refers to same resource as like CRUD operation on employee resource using HTTP verbs.
+
+5. What are safe REST operations?
+Safe REST operations are HTTP methods that do not modify resources. For example, using GET or HEAD on a resource URL, should NEVER change the resource. 
+
+6. What are idempotent operations? Why is idempotency important?
+Idempotent operations are those HTTP methods that can be called repetitively many times without different outcomes. It would not matter if the method is called only once, or many times over. The result should be the same. Again, this only applies to the result, not the resource itself.
+Consider the following examples:
+
+a = 4; (is idempotent)
+a++; (is not idempotent)
+
+Idempotency is important in building a fault-tolerant API. Suppose a client wants to update a resource through POST. Since POST is not a idempotent method, calling it multiple times can result in wrong updates. What would happen if you sent out the POST request to the server, but you get a timeout. Is the resource actually updated? Does the timeout happened during sending the request to the server, or the response to the client? Can we safely retry again, or do we need to figure out first what has happened with the resource? By using idempotent methods, we do not have to answer this question, but we can safely resend the request until we actually get a response back from the server.
+
+
+Explain the term ‘Addressing’ with respect to RESTful WEB service.
+Just like we require address with postal code to reach any person, in the same way, ‘Addressing’ locates resources that are present on the server for the purpose of hosting web services. This is usually done with URI i.e. Unified Resource Identifier.
+
+Explain messaging technique.
+Messages are the mode of exchanging data for any type of communication to take place. In the same way, HTTP protocol plays the role of message communication between the client and server through HTTP Request and Response methods. HTTP request is sent by the client who contains information about the data and in turn, receives HTTP Response from the server.
+Messages are the collection of information about the data i.e. Metadata.
+
+What is Caching?
+Caching is the process in which server response is stored so that a cached copy can be used when required and there is no need of generating the same response again. This process not only reduces the server load but in turn increase the scalability and performance of the server. Only the client is able to cache the response and that too for a limited period of time.
+
+Explain the term ‘Statelessness’ with respect to RESTful WEB service. advantages and disadvantages of ‘Statelessness
+In REST, ST itself defines State Transfer and Statelessness means complete isolation. This means, the state of the client’s application is never stored on the server and is passed on. In this process, the clients send all the information that is required for the server to fulfill the HTTP request that has been sent. Thus every client request and the response is independent of the other with complete assurance of providing required information.
+Every client passes a ‘session identifier’ which also acts as an identifier for each session.
+
+Advantages:
+	Every method required for communication is identified as an independent method i.e. there are no dependencies to other methods.
+    Any previous communication with the client and server is not maintained and thus the whole process is very much simplified.
+    If any information or metadata used earlier in required in another method, then the client sends again that information with HTTP request.
+    HTTP protocol and REST web service, both shares the feature of statelessness.
+
+Disadvantages:
+	In every HTTP request from the client, the availability of some information regarding the client state is required by the web service.
+	
+Mentioned below are the header of the resources and their brief description so that they can be identified for the caching process:
+
+    Time and Date of resource creation
+    Time and date of resource modification that usually stores the last detail.
+    Cache control header
+    Time and date at which the cached resource will expire.
+    The age which determines the time from when the resource has been fetched.
+
+Explain Cache-control header.
+
+A standard Cache control header can help in attaining cache ability. Enlisted below is the brief description of various cache control header:
+
+    Public: Resources that are marked as the public can be cached by any intermediate components between the client and server.
+    Private: Resources that are marked as private can only be cached by the client.
+    No cache means that particular resource cannot be cached and thus the whole process is stopped.
+
+What is Payload?
+The request data which is present in the body part of every HTTP message is referred as ‘Payload’.  In Restful web service, the payload can only be passed to the recipient through POST method.
+
+There is no limit of sending data as payload through POST method but the only concern is that more data with consuming more time and bandwidth. This may consume much of user’s time also.
+
+What are the core components of HTTP request and HTTP response?
+
+The core components that come under HTTP Request are:
+
+    Verb: Includes methods like GET, PUT, POST, etc.
+    Uniform Resource Identifier for identifying the resources available on the server.
+    HTTP Version for specifying the HTTP version.
+    HTTP Request header for containing the information about the data.
+    HTTP Request body that contains the representation of the resources in use.
+
+The core components that come under HTTP Response are:
+
+    Request Code: This contains various codes which determine the status of the server response.
+    HTTP Version for specifying the HTTP version.
+    HTTP Response header for containing the information about the data.
+    HTTP Response body that contains the representation of the resources in use.
+
+What is your understanding about JAX-RS?
+
+JAX-RS is defined as the Java API for RESTful web service. Among multiple libraries and framework, this is considered as the most suitable Java programming language based API which supports RESTful web service.
+Some of the implementations of JAX-RS are:
+    Jersey
+    RESTEasy
+    Apache CFX
+    Play
+
+Q28 What is the Restlet framework?
+
+Restlet is a lightweight, comprehensive, open source RESTful web API framework for the Java platform. 
+It has advantages such as
+
+    websocket and server-sent events support; 
+    HTTP/2 support; 
+    transparent HTTP PATCH support; 
+    client cache service; 
+    fluent APIs.
+3) What is Restlet framework ?
+Restlet is leading RESTful web framework for Java applications is used to build RESTFul web services it has two part Restlet API and a Restlet implementation much like Servlet specification. There are many implementation of Restlet framework available you just need to add there jar in your classpath to use them. By using Restlet web framework you can write client and server.
+
+5) Can you use Restlet without any web-container ?
+Yes, Restlet framework provide default server which can be used to handle service request in web container is not available.
+
+http://restlet.com/
+
+Q29 What is the Jersey framework?
+
+Jersey is open source framework for developing RESTful Web Services in Java that provides support for JAX-RS APIs and serves as a JAX-RS (JSR 311 & JSR 339) Reference Implementation. It has advantages such as 
+
+    contains support for Web Application Description Language (WADL); 
+    contains Jersey Test Framework which lets run and test Jersey REST services inside JUnit;   
+    supports for the REST MVC pattern, which would allow to return a View from Jersey services rather than just data.
+
+https://jersey.java.net/
+
+WADL :
+
+The purpose of WADL is to define a contract. Contract specifies how one party can call another.
+
+When you create a web application from scratch, you don't need contract and WADL.
+
+When you integrate your system with the other system and you can communicate clearly with their development team, you don't need contract and WADL (because you can make a phone call to make things clear).
+
+However when you integrate a complex enterprise system with several others complex enterprise systems maintained by several different companies (or federal institutions), then believe me you want to have a communication contract defined as strictly as possible. Then you need WADL or Open Specification. Need it badly.
+
+People with weak enterprise background tend to see entire IT as a collection of separated web applications developed independently. But enterprise reality is sometimes tough. Sometimes you can't even call or write to the people developing the application you have to integrate with. Sometimes you communicate with a legacy application that is no longer maintained--it just runs and you need to figure out how to communicate with it properly. In such conditions you need a contract because it saves your ass.
+ex:
+   <resources base="http://localhost:8080/data/balance/">
+   <resource path="{date}">
+<method name="GET">
+      <request>
+      <param name="date" type="xsd:string" style="template"/>
+      </request>
+      <response...
+	  
+Actually client generation is the minor feature of the contract definition. It's just a toy. Contract enforces bad communicators to communicate integration rules clearly. This is the main reason to use WADL or Open Specification or whatever.
+
+
+Q30 What is the RESTeasy framework?
+
+RESTeasy is a JBoss project, which implements of the JAX-RS specification. It has benefits such as 
+
+    fully certified JAX-RS implementation; supports HTTP 1.1 caching semantics including cache revalidation; 
+    JAXB marshalling into XML, JSON, Jackson, Fastinfoset, and Atom as well as wrappers for maps, arrays, lists, and sets of JAXB Objects; 
+    OAuth2 and Distributed SSO with JBoss AS7; 
+    rich set of providers for: XML, JSON, YAML, Fastinfoset, Multipart, XOP, Atom, etc. 
+
+http://resteasy.jboss.org/
+
+11) What is difference between top-down and bottom-up approach of developing web services ?
+In top-down approach first WSDL document is created and than Java classes are developed based on WSDL contract, so if WSDL contract changes you got to change your Java classes while in case of bottom up approach of web service development you first create Java code and then use annotations like @WebService to specify contract or interface and WSDL field will be automatically generated from your build.
+
+
+10) What is WSDL?
+WSDL stands for Web Services Description Language. It is a xml document containing information about web services such as method name, method parameter etc. 
+
+11) What is UDDI?
+UDDI stands for Universal Description, Discovery and Integration. It is a XML based framework for describing, discovering and integrating web services. It contains a list of available web services. WSDL is the part of UDDI. More details...
+
+12) What is the difference between SOAP and REST web services?
+No.	SOAP	REST
+1)	SOAP is a protocol.	REST is an architectural style.
+2)	SOAP stands for Simple Object Access Protocol.	REST stands for REpresentational State Transfer.
+3)	SOAP can't use REST because it is a protocol.	REST can use SOAP web services because it is a concept and can use any protocol like HTTP, SOAP.
+4)	SOAP uses services interfaces to expose the business logic.	REST uses URI to expose business logic.
+5)	SOAP defines standards to be strictly followed. 	REST does not define too much standards like SOAP.
+6)	SOAP permits XML data format only.	REST permits different data format such as Plain text, HTML, XML, JSON etc.
+    SOAP services have well defined structure and interface (WSDL).
+    SOAP is based on well defined standards (WS-Security, WS-AtomicTransaction and WS-ReliableMessaging).
+	REST reads can be cached . soap cant
+	Soap is WSDL depedent
+How to decide which one of web service to use REST or SOAP? 
+“REST vs SOAP” we can rephrased to "Simplicity vs Standard". Of course, "Simplicity" with REST at most cases wins, it wins in performance, scalability and support for multiple data formats, but SOAP is favored where service requires comprehensive support for security (WS-security) and transactional safety (ACID).
+	
+7) Mention what is the difference between AJAX and REST?
+                            AJAX 	                                REST
+
+    In Ajax, the request are sent to the server by using XMLHttpRequest objects. The response is used by the JavaScript code to dynamically alter the current page
+    Ajax is a set of technology; it is a technique of dynamically updating parts of UI without having to reload the page
+    Ajax eliminates the interaction between the customer and server asynchronously
+    REST requires the interaction between the customer and server
+
+	
+
+     REST have a URL structure and a request/response pattern the revolve around the use of resources
+    REST is a type of software architecture and a method for users to request data or information from servers
+    REST requires the interaction between the customer and server
+
+	13) What is SOA?
+SOA stands for Service Oriented Architecture. It is a design pattern to provide services to other application through protocol. 
+
+What is JAXB?
+JAXB (Java Architecture for XML Binding) is a Java standard that defines how Java objects are converted from and to XML. It makes reading and writing of XML via Java relatively easy.
+
+
+21. Name some common http response codes. When do you need @ResponseStatus?
+    2xx Success
+        200 OK
+        201 Created
+        204 No Content
+    3xx Redirection
+        304 Not Modified
+    4xx Client Error
+        400 Bad Request
+        401 Unauthorized
+        403 Forbidden
+        404 Not Found
+        409 Conflict
+    5xx Server Error
+        500 Internal Server Error
+        503 Service Unavailable
+
+@ResponseStatus annotation available on custom exceptions and to map these exceptions to HTTP status codes.
+
+What is Richardson Maturity Model?(Best Practices)
+Richardson Maturity Model defines the maturity level of a Restful Web Service. Following are the different levels and their characteristics.
+
+    Level 0 : Expose SOAP web services in REST style. Expose action based services (http://server/getPosts, http://server/deletePosts, http://server/doThis, http://server/doThat etc) using REST.
+    Level 1 : Expose Resources with proper URI’s (using nouns). Ex: http://server/accounts, http://server/accounts/10. However, HTTP Methods are not used.
+    Level 2 : Resources use proper URI's + HTTP Methods. For example, to update an account, you do a PUT to . The create an account, you do a POST to . Uri’s look like posts/1/comments/5 and accounts/1/friends/1.
+    Level 3 : HATEOAS (Hypermedia as the engine of application state). You will tell not only about the information being requested but also about the next possible actions that the service consumer can do. When requesting information about a facebook user, a REST service can return user details along with information about how to get his recent posts, how to get his recent comments and how to retrieve his friend’s list.
+
+9) How to display custom error pages using RestFull web services ?
+In order to customize error you need to extend StatusService and implement getRepresentation(Status, Request, Response) method with your custom code now assign instance of your CustomStatusService to appropriate "statusService property".
+
+12) What happens if RestFull resources are accessed by multiple clients ? do you need to make it thread-safe?
+Since a new Resource instance is created for every incoming Request there is no need to make it thread-safe or add synchronization. multiple client can safely access RestFull resources concurrently.
+
+Important Annotations:
+
+    @ApplicationPath("/"). @Path("users") : used on class and methods to define the url path.
+    @GET @POST : Used to define the HTTP method that invokes the method.
+    @Produces(MediaType.APPLICATION_JSON) : Defines the output format of Restful service.
+    @Path("/{id}") on method (and) @PathParam("id") on method parameter : This helps in defining a dynamic parameter in Rest URL. @Path("{user_id}/followers/{follower_id}") is a more complicated example.
+    @QueryParam("page") : To define a method parameter ex: /users?page=10.
+
+Useful methods:
+
+    Response.OK(jsonBuilder.build()).build() returns json response with status code.
+    Json.createObjectBuilder(). add("id",user.getId()); creates a user object.
+	*******************************************************
+	
+*** pathparam queryparam formparam matrixparam headerparam
+very imp : http://javahungry.blogspot.com/2015/07/web-services-interview-questions-and-answers.html
+Q34  What does a @PathParam do?
+
+@PathParam annotation injects the value of URI parameter that defined in @Path expression.
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+
+@Path("/persons")
+public class PersonRestService {
+
+@GET
+@Path("{id}")
+public Response getPersonById(@PathParam("id") String id) {
+
+  return Response.status(200).entity("getPersonById is called, id : " + id).build();
+ }
+}
+
+On calling URI: “/persons/1” result:  getPersonById is called, id : 1
+
+Q35  What does a @QueryParam do?
+@QueryParam annotation injects URI query parameter into Java method.
+
+import java.util.List;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Response;
+
+@Path("/persons")
+public class PersonService {
+
+@GET
+@Path("/query")
+public Response getPersons(
+@QueryParam("from") int from,
+@QueryParam("to") int to,
+@QueryParam("orderBy") List&lt;String&gt; orderBy) {
+
+return Response
+  .status(200)
+  .entity("getPersons is called, from : " + from + ", to : " + to
++ ", orderBy" + orderBy.toString()).build();
+
+ }
+}
+
+On calling URI: “/persons/query?from=10&to=20&orderBy=age&orderBy=name” result: getPersons is called, from : 10, to : 20, orderBy[age, name]
+
+
+Q36  What does a @MatrixParam do?
+
+
+@MatrixParam are a set of “name=value” in URI path.
+
+import javax.ws.rs.GET;
+import javax.ws.rs.MatrixParam;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.core.Response;
+
+@Path("/books")
+public class BookService {
+
+@GET
+@Path("{year}")
+public Response getBooks(@PathParam("year") String year,
+@MatrixParam("author") String author,
+@MatrixParam("country") String country) {
+
+return Response
+.status(200)
+.entity("getBooks is called, year : " + year
++ ", author : " + author + ", country : " + country)
+.build();
+
+ }
+}
+
+
+On calling URI: “/books/2015” result: getBooks is called, year : 2015, author : null, country : null
+On calling URI: “/books/2015;author= doyle;country=scotland” result: getBooks is called, year : 2015, author : doyle, country : scotland
+
+Q37  What does a @FormParam do?
+
+@FormParam bind HTML form parameters value to a Java method.
+
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+
+@Path("/persons")
+public class PersonService {
+
+@POST
+@Path("/add")
+public Response addPerson(
+@FormParam("name") String name,
+@FormParam("age") int age) {
+
+return Response.status(200)
+.entity("addPerson is called, name : " + name + ", age : " + age)
+.build();
+
+ }
+}
+
+HTML form:
+
+<html>
+<body>
+<form action="/persons/add" method="post">
+<p>
+Name : <input type="text" name="name" />
+</p>
+<p>
+Age : <input type="text" name="age" />
+</p>
+<input type="submit" value="Add Person" />
+</form>
+
+</body>
+</html>
+
+
+Q39  How to get HTTP request header in JAX-RS (2 ways)?
+
+    inject directly with @HeaderParam;
+
+
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.HeaderParam;
+import javax.ws.rs.core.Response;
+
+@Path("/persons")
+public class PersonService {
+
+@GET
+@Path("/get")
+public Response getPerson(
+@HeaderParam("person-agent") String personAgent) {
+
+return Response.status(200)
+.entity("getPerson is called, personAgent : " + personAgent)
+.build();
+
+ }
+}
+
+On calling URI: “/persons/get” result: getPerson is called, personAgent : Mozilla/5.0 (Windows NT 6.1; rv:5.0) Gecko/20100101 Firefox/5.0
+
+    pragmatically via @Context.
+
+
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.Response;
+
+@Path("/persons")
+public class PersonService {
+
+@GET
+@Path("/get")
+public Response getPerson(@Context HttpHeaders headers) {
+
+String personAgent = headers.getRequestHeader("person-agent").get(0);
+
+return Response.status(200)
+.entity("getPerson is called, personAgent : " + personAgent)
+.build();
+
+ }
+}
+
+On calling URI: “/persons/get” result: getPerson is called, personAgent : Mozilla/5.0 (Windows NT 6.1; rv:5.0) Gecko/20100101 Firefox/5.0
+
+
+
+
+***********************************************
+Q40  How to download file in JAX-RS?
+
+put @Produces(“?”) on service method, with a Response return type. Instead “?” write a type text/plain, image/png, etc. 
+    set “Content-Disposition” in Response header to tell browser pop up a download box for user to download.
+
+
+import java.io.File;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
+@Path("/image")
+public class ImageService {
+
+private static final String FILE_PATH = "c:\\my.png";
+
+@GET
+@Path("/get")
+@Produces("image/png")
+public Response getFile() {
+
+File file = new File(FILE_PATH);
+
+ResponseBuilder response = Response.ok((Object) file);
+response.header("Content-Disposition",
+"attachment; filename=image_from_server.png");
+return response.build();
+ }
+}
+
+
+Question 3 : What is HTTP Basic Authentication and how it works?
+
+Question 5 : How do you configure RESTFul web service?
+
+Question 6 : How you apply security in RESTFul web services?
+https://howtodoinjava.com/security/restful-web-services-security-guide/
+
+Question 7 : Have you used securing RESTful APIs with HTTP Basic Authentication
+https://howtodoinjava.com/security/restful-web-services-security-guide/
+
+Question 8 : How you maintain session in RESTful services?
+https://stackoverflow.com/questions/3105296/if-rest-applications-are-supposed-to-be-stateless-how-do-you-manage-sessions
+
+*******************************************
+Spring
+
+10. What is an HttpMessageConverter?
+HttpMessageConverter is a strategy interface that specifies a converter that can convert from and to HTTP requests and responses. Internally Spring MVC uses it to convert the Http request to an object representation and back. Message converters are used to marshall and unmarshall Java Objects to and from JSON, XML, etc – over HTTP. Read More about HttpMessageConverter in Spring.
+
+12. What does @RequestMapping do?
+@RequestMapping can be applied to the controller class as well as methods. This annotation for mapping web requests onto specific handler classes and/or handler methods. Read more about @RequestMapping annotation.
+
+
+14. What is the difference between @Controller and @RestController?
+The key difference between a traditional Spring MVC @Controller and the RESTful web service @RestController is the way the HTTP response body is created. While the traditional MVC controller relies on the View technology, the RESTful web service controller simply returns the object and the object data is written directly to the HTTP response as JSON/XML by registered HttpMessageConverters.
+
+15. When do you need @ResponseBody?
+When you use the @ResponseBody annotation on a method, Spring converts the return value and writes it to the http response automatically. Each method in the Controller class must be annotated with @ResponseBody.
+
+16. What does @PathVariable do?
+@PathVariable is used to pass parameter along with the url, sometimes we need to pass parameters along with the url to get the data. Spring MVC provides support for customizing the URL in order to get data. To achieving this purpose @PathVariable annotation is used in Spring mvc framework. Read More about PathVariable.
+
+8. What is the RestTemplate and It’s advantages?
+In Spring REST client, The RestTemplate is the core class for client-side access to Spring RESTful web services. It communicates HTTP server using RESTful constraints. It is very similar to other template classes in the Spring like JdbcTemplate and HibernateTemplate etc. In Spring, RestTemplate provides higher level implementation of corresponding HTTP methods such as GET, POST, PUT, DELETE, HEAD etc. It provides the methods to communicate by using these HTTP methods with URI template, URI params, request object and response type as arguments. Read More about RestTemplate.
+9. Which HTTP methods does REST use?
+RestTemplate provides higher level implementation of corresponding HTTP methods such as GET, POST, PUT, DELETE, HEAD etc.
+
+19. Is REST secure? What can you do to secure it?
+REST is nothing but it architectural desgin or paradigms to design restful web service. So REST does not provide any security constraints by default but we can implement it in the RESTful web services by using security layers like transport layer security (TLS), auth token security.
+
+20. Where do you need @EnableWebMVC?
+@EnableWebMvc- It used for enabling spring mvc behavior i.e. it is responsible for registering Spring MVC required Bean Post Processors in the application as like Jackson2JsonMessageConverter etc.
+
+22. Does REST work with transport layer security (TLS)?
+Yes. Transport Layer Security can encrypt the communication to a RESTful Webservice and authenticate the server to a client.
+
+23. Do you need Spring MVC in your classpath for Spring REST?
+Yes, Spring REST uses the Spring MVC annotations like @RestController, @RequestBody and @ResponseBody etc.
