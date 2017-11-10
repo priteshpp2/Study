@@ -1,0 +1,148 @@
+Question1: What is IOC or inversion of control? (answer)
+Answer: As the name implies Inversion of control means now we have inverted the control of creating the object from our own using new operator to container or framework. Now it’s the responsibility of container to create an object as required. We maintain one XML file where we configure our components, services, all the classes and their property. We just need to mention which service is needed by which component and container will create the object for us. This concept is known as dependency injection because all object dependency (resources) is injected into it by the framework.
+
+Example:
+<bean id="createNewStock" class="springexample.stockMarket.CreateNewStockAccont">
+<property name="newBid"/>
+</bean>
+In this example, CreateNewStockAccont class contain getter and setter for newBid and container will instantiate newBid and set the value automatically when it is used. This whole process is also called wiring in Spring and by using annotation it can be done automatically by Spring, referred as auto-wiring of bean in Spring.
+Inversion of Control (IoC) is the mechanism to achieve loose-coupling between Objects dependencies. To achieve loose coupling and dynamic binding of the objects at runtime.
+
+Spring Framework IoC container classes are part of org.springframework.beans and org.springframework.context packages and provides us different ways to decouple the object dependencies.
+
+Some of the useful ApplicationContext implementations that we use are;
+AnnotationConfigApplicationContext: For standalone java applications using annotations based configuration.
+ClassPathXmlApplicationContext: For standalone java applications using XML based configuration.
+FileSystemXmlApplicationContext: Similar to ClassPathXmlApplicationContext except that the xml configuration file can be loaded from anywhere in the file system.
+AnnotationConfigWebApplicationContext and XmlWebApplicationContext for web applications.
+
+Question 2: Explain the Spring Bean-LifeCycle.
+Ans: Spring framework is based on IOC so we call it as IOC container also So Spring beans reside inside the IOC container. Spring beans are nothing but Plain old java object (POJO).
+Following steps explain their life cycle inside the container.
+1. The container will look the bean definition inside configuration file (e.g. bean.xml).
+2 using reflection container will create the object and if any property is defined inside the bean definition then it will also be set.
+3. If the bean implements the BeanNameAware interface, the factory calls setBeanName() passing the bean’s ID.
+4. If the bean implements the BeanFactoryAware interface, the factory calls setBeanFactory(), passing an instance of itself.
+5. If there are any BeanPostProcessors associated with the bean, their post- ProcessBeforeInitialization() methods will be called before the properties for the Bean are set.
+6. If an init() method is specified for the bean, it will be called.
+7. If the Bean class implements the DisposableBean interface, then the method destroy() will be called when the Application no longer needs the bean reference.
+8. If the Bean definition in the Configuration file contains a 'destroy-method' attribute, then the corresponding method definition in the Bean class will be called.
+
+Question 3: what is Bean Factory, have you used XMLBeanFactory?
+Ans: BeanFactory is factory Pattern which is based on IOC design principles.it is used to make a clear separation between application configuration and dependency from actual code. The XmlBeanFactory is one of the implementations of Bean Factory which we have used in our project. The org.springframework.beans.factory.xml.XmlBeanFactory is used to create bean instance defined in our XML file.
+BeanFactory factory = new XmlBeanFactory(new FileInputStream("beans.xml"));
+Or
+ClassPathResource resorce = new ClassPathResource("beans.xml");
+XmlBeanFactory factory = new XmlBeanFactory(resorce);
+
+4-Difference
+One difference between bean factory and application context is that former only instantiate bean when you call getBean() method while ApplicationContext instantiates Singleton bean when the container is started,  It doesn't wait for getBean to be called
+
+Before seeing difference between ApplicationContext and BeanFactory, let see some similarity between both of them. Spring provides two kinds of IOC container, one is BeanFactory and other is ApplicationContext. Syntactically BeanFactory and ApplicationContext both are Java interfaces and ApplicationContext extends BeanFactory. Both of them are configuration using XML configuration file. In short BeanFactory provides basic IOC and DI features while ApplicationContext provides advanced features. Apart from these, Here are few more difference between BeanFactory and ApplicationContext which is mostly based upon features supported by them.
+
+
+1) BeanFactory doesn't provide support for internationalization i.e. i18n but ApplicationContext provides support for it.
+
+2) Another difference between BeanFactory vs ApplicationContext is ability to publish event to beans that are registered as listener.
+
+3) One of the popular implementation of BeanFactory interface is XMLBeanFactory while one of the popular implementation of ApplicationContext interface is ClassPathXmlApplicationContext. On Java web application we use WebApplicationContext  which extends ApplicationContext interface and adds getServletContext method.
+
+4) If you are using auto wiring and using BeanFactory than you need to register AutoWiredBeanPostProcessor using API which you can configure in XML if you are using  ApplicationContext. In summary BeanFactory is OK for testing and non production use but ApplicationContext is more feature rich container implementation and should be favored over BeanFactory
+
+Difference between BeanFactory and ApplicationContext in Spring framework
+These were some worth noting difference between BeanFactory and ApplicationContext in Spring framework. In most practical cases you will be using ApplicationContext but knowing about BeanFactory is important to understand fundamental concept of spring framework. I mostly use XML configuration file and ClassPathXmlApplicationContext to quickly run any Spring based Java program from Eclipse  by using following snippet of code :
+
+public static void main(String args[]){
+ApplicationContext ctx =new ClassPathXmlApplicationContext("beans.xml");
+Hello hello =(Hello) ctx.getBean("hello");
+hello.sayHello("John");
+}
+
+here beans.xml is your spring configuration file and “hello” is a bean defined in that spring configuration file. Here we have used ClassPathXmlApplicationContext  which is an implementation of ApplicationContext interface in Spring.
+
+
+Questions 5: What is the difference between @Controller and @RestController in Spring MVC? (answer)
+Even though both are used to indicate that a Spring bean is a Controller in Spring MVC setup, @RestController is better when you are developing RESTful web services using Spring MVC framework. It's a combination of @Controller + @ResponseBody annotation which allows the controller to directly write the response and bypassing the view resolution process, which is not required for RESTful web service. 
+
+It also instructs DispatcherServlet to use different HttpMessageConverters to represent the response in the format client is expecting e.g. HttpMessageJackson2Convert to represent response in JSON format and JAXB based message converts to generate XML response
+
+
+Question 6: What is the difference between singleton and prototype bean?Request session and global
+spring questions answers
+Ans: This is another popular spring interview questions and an important concept to understand. Basically, a bean has scopes which define their existence on the application
+Singleton: means single bean definition to a single object instance per Spring IOC container.
+Prototype: means a single bean definition to any number of object instances.
+Whatever beans we defined in spring framework are singleton beans. There is an attribute in bean tag named ‘singleton’ if specified true then bean becomes singleton and if set to false then the bean becomes a prototype bean. By default, it is set to true. So, all the beans in spring framework are by default singleton beans.
+
+<bean id="createNewStock"     class="springexample.stockMarket.CreateNewStockAccont" singleton=”false”>
+<property name="newBid"/>
+</bean>
+
+
+Question 7: What is the role of DispatcherServlet in Spring MVC? (answer)
+The DispatcherServlet is very important from Spring MVC perspective, it acts as a FrontController i.e. all requests pass through it. It is responsible for routing the request to controller and view resolution before sending the response to the client. When Controller returns a Model or View object, it consults all the view resolvers registered to find the correct type of ViewResolver which can render the response for clients. 
+
+In case of RESTful Web Services, the DispatcherServlet is also responsible for using HttpMessageConverts to represent the response in the JSON, XML, or TEXT format, depending on the content negotiation between Client and Server e.g. if client send request with HTTP accept header as "application/json" then DispatcherServlet will ask the HttpMessageJackson2Converter to convert the response into JSON format.  
+
+8.What do you understand by Aspect Oriented Programming?
+
+Enterprise applications have some common cross-cutting concerns that is applicable for different types of Objects and application modules, such as logging, transaction management, data validation, authentication etc. In Object Oriented Programming, modularity of application is achieved by Classes whereas in AOP application modularity is achieved by Aspects and they are configured to cut across different classes methods.
+
+AOP takes out the direct dependency of cross-cutting tasks from classes that is not possible in normal object oriented programming. For example, we can have a separate class for logging but again the classes will have to call these methods for logging the data. 
+
+9.What is Aspect, Advice, Pointcut, JointPoint and Advice Arguments in AOP?
+
+Aspect: Aspect is a class that implements cross-cutting concerns, such as transaction management. Aspects can be a normal class configured and then configured in Spring Bean configuration file or we can use Spring AspectJ support to declare a class as Aspect using @Aspect annotation.
+
+Advice: Advice is the action taken for a particular join point. In terms of programming, they are methods that gets executed when a specific join point with matching pointcut is reached in the application. You can think of Advices as Spring interceptors or Servlet Filters.
+
+Pointcut: Pointcut are regular expressions that is matched with join points to determine whether advice needs to be executed or not. Pointcut uses different kinds of expressions that are matched with the join points. Spring framework uses the AspectJ pointcut expression language for determining the join points where advice methods will be applied.
+
+Join Point: A join point is the specific point in the application such as method execution, exception handling, changing object variable values etc. In Spring AOP a join points is always the execution of a method.
+
+Advice Arguments: We can pass arguments in the advice methods. We can use args() expression in the pointcut to be applied to any method that matches the argument pattern. If we use this, then we need to use the same name in the advice method from where argument type is determined.
+
+
+Question 10: Difference between the setter and constructor injection in Spring? (answer)
+Setter injection is more flexible than constructor injection because you must remember the type and order of constructor parameter. Also, constructor injection is generally used to inject the mandatory dependency, while setter can be used to inject optional dependency.
+
+Partial dependency: can be injected using setter injection but it is not possible by constructor. Suppose there are 3 properties in a class, having 3 arg constructor and setters methods. In such case, if you want to pass information for only one property, it is possible by setter method only.
+Overriding: Setter injection overrides the constructor injection. If we use both constructor and setter injection, IOC container will use the setter injection.
+Changes: We can easily change the value by setter injection. It doesn't create a new bean instance always like constructor. So setter injection is flexible than constructor injection.
+
+11-ref vs idref
+
+12-innerbean and alias
+
+13-DI with collection
+
+14-Spring-MVC-architecture
+
+15-ApplicationContextAware
+
+16-BeanDefinitionInheritance
+
+17-Lifecyclecallbacks - Running of methods before initilizaing bean and at the time of bean is going to destroy 
+
+18-BeanPostProcessors and BeanFactoryPostProcessor
+
+19-@Required @Autowired @Qualifier
+
+20-ViewResolver and multipartresolver
+
+21-MVC interceptor
+
+22-ContextLoaderListener
+
+23.How to handle exceptions in Spring MVC Framework?
+
+    Spring MVC Framework provides following ways to help us achieving robust exception handling.
+        Controller Based – We can define exception handler methods in our controller classes. All we need is to annotate these methods with @ExceptionHandler annotation.
+        Global Exception Handler – Exception Handling is a cross-cutting concern and Spring provides @ControllerAdvice annotation that we can use with any class to define our global exception handler.
+        HandlerExceptionResolver implementation – For generic exceptions, most of the times we serve static pages. Spring Framework provides HandlerExceptionResolver interface that we can implement to create global exception handler. The reason behind this additional way to define global exception handler is that Spring framework also provides default implementation classes that we can define in our spring bean configuration file to get spring framework exception handling benefits.
+
+    For a complete example, please read Spring Exception Handling Example.
+
+
+
+
