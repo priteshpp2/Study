@@ -119,6 +119,8 @@ idref is used to pass the name of the bean (as a String) that is referred to.
 13-DI with collection
 
 14-Spring-MVC-architecture
+http://www.java4s.com/spring-mvc/spring-mvc-execution-flow-diagram-spring-mvc-3-2-flow/
+https://www.javatpoint.com/spring-3-mvc-tutorial
 
 15-ApplicationContextAware
 -https://www.concretepage.com/spring/example_applicationcontextaware_spring
@@ -154,6 +156,7 @@ In Spring, InitializingBean and DisposableBean are two marker interfaces, a usef
 20-ViewResolver and multipartresolver
 
 21-MVC interceptor
+http://javapapers.com/spring/spring-mvc-handler-interceptor/
 
 22-ContextLoaderListener
 
