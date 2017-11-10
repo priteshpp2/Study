@@ -111,6 +111,8 @@ Overriding: Setter injection overrides the constructor injection. If we use both
 Changes: We can easily change the value by setter injection. It doesn't create a new bean instance always like constructor. So setter injection is flexible than constructor injection.
 
 11-ref vs idref
+ref is used to pass the bean that the ref refers to.
+idref is used to pass the name of the bean (as a String) that is referred to.
 
 12-innerbean and alias
 
@@ -119,10 +121,31 @@ Changes: We can easily change the value by setter injection. It doesn't create a
 14-Spring-MVC-architecture
 
 15-ApplicationContextAware
+-https://www.concretepage.com/spring/example_applicationcontextaware_spring
+ApplicationContextAware is used for bean lookup purpose and for those objects which needs to access file resources. 
 
 16-BeanDefinitionInheritance
+<bean id="inheritedTestBean" abstract="true"
+    class="org.springframework.beans.TestBean">
+  <property name="name" value="parent"/>
+  <property name="age" value="1"/>
+</bean>
+
+<bean id="inheritsWithDifferentClass"
+      class="org.springframework.beans.DerivedTestBean"
+      parent="inheritedTestBean" init-method="initialize">
+    
+  <property name="name" value="override"/>
+  <!-- the age property value of 1 will be inherited from  parent -->
+</bean>
 
 17-Lifecyclecallbacks - Running of methods before initilizaing bean and at the time of bean is going to destroy 
+It works same like initializing and destroying a bean using the Spring configuration init-method and destroy-method.
+In Spring, InitializingBean and DisposableBean are two marker interfaces, a useful way for Spring to perform certain actions upon bean initialization and destruction.
+
+    For bean implemented InitializingBean, it will run afterPropertiesSet() after all bean properties have been set.
+    For bean implemented DisposableBean, it will run destroy() after Spring container is released the bean.
+
 
 18-BeanPostProcessors and BeanFactoryPostProcessor
 
@@ -142,7 +165,4 @@ Changes: We can easily change the value by setter injection. It doesn't create a
         HandlerExceptionResolver implementation – For generic exceptions, most of the times we serve static pages. Spring Framework provides HandlerExceptionResolver interface that we can implement to create global exception handler. The reason behind this additional way to define global exception handler is that Spring framework also provides default implementation classes that we can define in our spring bean configuration file to get spring framework exception handling benefits.
 
     For a complete example, please read Spring Exception Handling Example.
-
-
-
 
