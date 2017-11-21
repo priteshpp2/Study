@@ -1,6 +1,17 @@
 1.why we override clone method?
+-We can't call object class clone method using object class reference from child class which is not in the java.lang package.
+thats why we overrride clone method and and call super.clone
 
-2.JVM architecture?
+2.JVM JDK JRE?JVM architecture?
+	JDK – Java Development Kit (in short JDK) is Kit which provides the environment to develop and execute(run) the Java program. JDK is a kit(or package) which includes two things
+            Development Tools(to provide an environment to develop your java programs)
+			(an interpreter/loader (Java), a compiler (javac), an archiver (jar), a documentation generator (Javadoc) and other tools needed in Java development.)
+
+            JRE (to execute your java program).
+
+    Note : JDK is only used by Java Developers.
+    JRE – Java Runtime Environment (to say JRE) is an installation package which provides environment to only run(not develop) the java program(or application)onto your machine. JRE is only used by them who only wants to run the Java Programs i.e. end users of your system.
+    JVM – Java Virtual machine(JVM) is a very important part of both JDK and JRE because it is contained or inbuilt in both. Whatever Java program you run using JRE or JDK goes into JVM and JVM is responsible for executing the java program line by line hence it is also known as interpreter.
 https://dzone.com/articles/jvm-architecture-explained
 
 3.shutdown hook?
@@ -17,13 +28,26 @@ Ex:
 		r.addShutdownHook(new MyThread());   //  In Run Method of MyThread class we can perform cleanup resource
 	}
 
-4.JVM JDK JRE
+4.
 5.CPP vs JAVA
+	Platform-independent
+	system/application programming
+	multiple inheritance
+	supports pointers / Java supports pointer internally. But you can't write the pointer program in java. It means java has restricted pointer support in java.
+	Call by Value and Call by reference / call by value
+	C++ doesn't support documentation comment.	Java supports documentation comment (/** ... */)
+	Virtual Keyword	C++ supports virtual keyword so that we can decide whether or not override a function.	Java has no virtual keyword. We can override all non-static methods by default. In other words, non-static methods are virtual by default.
+	
 6.Aggregation vs Composition vs Inheritance (Benifits of composition over inheritance)
 7.Class vs Heap vs Stack vs PCR vs Native mathode stack
-8.Virtual Funtion
-9.JIT compiler
+8.
+9.
 10.Imuutable
-
+http://www.geeksforgeeks.org/create-immutable-class-java/
 11.generics
-https://www.journaldev.com/1663/java-generics-example-method-class-interface
+https://www.javatpoint.com/generics-in-java
+12.class not found vs no class def found
+https://dzone.com/articles/java-classnotfoundexception-vs-noclassdeffounderro
+13.Internal Working of hashmap
+https://dzone.com/articles/how-hashmap-works-in-java
+14.hashcode and equals method
