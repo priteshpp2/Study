@@ -6,31 +6,23 @@ I like spring because it provides a lot of features and different modules for sp
 2.What are some of the important features and advantages of Spring Framework?
 Spring Framework is built on top of two design concepts – Dependency Injection and Aspect Oriented Programming.
 Some of the features of spring framework are:
-        Lightweight and very little overhead of using framework for our development.
+        Lightweight and very little overhead of using framework for our development because Spring framework is divided into several modules.
+		For example, if we don’t need Spring transaction management features, we don’t need to add that dependency in our project.
         Dependency Injection or Inversion of Control to write components that are independent of each other, spring container takes care of wiring them together to achieve our work.
         Spring IoC container manages Spring Bean life cycle.
+		Reduces the amount of boiler-plate code, such as initializing objects, open/close resources.
+		we can perform cross cutting tasks such as logging and authentication using spring support for aspect oriented programming
         Spring MVC framework can be used to create web applications as well as restful web services capable of returning XML as well as JSON response.
         Support for transaction management, JDBC operations, File uploading, Exception Handling etc with very little configurations, either by using annotations or by spring bean configuration file.
-
-Some of the advantages of using Spring Framework are:
-        Reducing direct dependencies between different components of the application, usually Spring IoC container is responsible for initializing resources or beans and inject them as dependencies.
-        Writing unit test cases are easy in Spring framework because our business logic doesn’t have direct dependencies with actual resource implementation classes. We can easily write a test configuration and inject our mock beans for testing purposes.
-        Reduces the amount of boiler-plate code, such as initializing objects, open/close resources.
-        Spring framework is divided into several modules, it helps us in keeping our application lightweight. For example, if we don’t need Spring transaction management features, we don’t need to add that dependency in our project.
-        Spring framework support most of the Java EE features and even much more. It’s always on top of the new technologies, for example there is a Spring project for Android to help us write better code for native android applications. This makes spring framework a complete package and we don’t need to look after different framework for different requirements.
 
 3.What do you understand by Dependency Injection?
 	Dependency Injection design pattern allows us to remove the hard-coded dependencies and make our application loosely coupled, extendable and maintainable. We can implement dependency injection pattern to move the dependency resolution from compile-time to runtime.
 
     Some of the benefits of using Dependency Injection are: Separation of Concerns, Boilerplate Code reduction, Configurable components and easy unit testing.
-
-4.How do we implement DI in Spring Framework?
-
-    We can use Spring XML based as well as Annotation based configuration to implement DI in spring applications.
+	We can use Spring XML based as well as Annotation based configuration to implement DI in spring applications.
 	
-    What are the benefits of using Spring Tool Suite?
-
-    We can install plugins into Eclipse to get all the features of Spring Tool Suite. However STS comes with Eclipse with some other important stuffs such as Maven support, Templates for creating different types of Spring projects and tc server for better performance with Spring applications.
+4.What are the benefits of using Spring Tool Suite?
+	We can install plugins into Eclipse to get all the features of Spring Tool Suite. However STS comes with Eclipse with some other important stuffs such as Maven support, Templates for creating different types of Spring projects and tc server for better performance with Spring applications.
 	I like STS because it highlights the Spring components and if you are using AOP pointcuts and advices, then it clearly shows which methods will come under the specific pointcut. So rather than installing everything on our own, I prefer using STS when developing Spring based applications.
 
 5.Name some of the important Spring Modules?
@@ -43,23 +35,32 @@ Some of the advantages of using Spring Framework are:
         Spring Web Module – for creating web applications.
         Spring MVC – Model-View-Controller implementation for creating web applications, web services etc.
 
-6.What do you understand by Aspect Oriented Programming?
+6.Difference
+	One difference between bean factory and application context is that bean factory only instantiate bean when you call getBean() method while ApplicationContext instantiates Singleton bean when the container is started,  It doesn't wait for getBean to be called
 
-    Enterprise applications have some common cross-cutting concerns that is applicable for different types of Objects and application modules, such as logging, transaction management, data validation, authentication etc. In Object Oriented Programming, modularity of application is achieved by Classes whereas in AOP application modularity is achieved by Aspects and they are configured to cut across different classes methods.
+	Before seeing difference between ApplicationContext and BeanFactory, let see some similarity between both of them. Spring provides two kinds of IOC container, one is BeanFactory and other is ApplicationContext. Syntactically BeanFactory and ApplicationContext both are Java interfaces and ApplicationContext extends BeanFactory. Both of them are configuration using XML configuration file. In short BeanFactory provides basic IOC and DI features while ApplicationContext provides advanced features. Apart from these, Here are few more difference between BeanFactory and ApplicationContext which is mostly based upon features supported by them.
 
-    AOP takes out the direct dependency of cross-cutting tasks from classes that is not possible in normal object oriented programming. For example, we can have a separate class for logging but again the classes will have to call these methods for logging the data. 
 
-7.What is Aspect, Advice, Pointcut, JointPoint and Advice Arguments in AOP?
+	1) BeanFactory doesn't provide support for internationalization i.e. i18n but ApplicationContext provides support for it.
 
-    Aspect: Aspect is a class that implements cross-cutting concerns, such as transaction management. Aspects can be a normal class configured and then configured in Spring Bean configuration file or we can use Spring AspectJ support to declare a class as Aspect using @Aspect annotation.
+	2) Another difference between BeanFactory vs ApplicationContext is ability to publish event to beans that are registered as listener.
 
-    Advice: Advice is the action taken for a particular join point. In terms of programming, they are methods that gets executed when a specific join point with matching pointcut is reached in the application. You can think of Advices as Spring interceptors or Servlet Filters.
+	3) One of the popular implementation of BeanFactory interface is XMLBeanFactory while one of the popular implementation of ApplicationContext interface is ClassPathXmlApplicationContext. On Java web application we use WebApplicationContext  which extends ApplicationContext interface and adds getServletContext method.
 
-    Pointcut: Pointcut are regular expressions that is matched with join points to determine whether advice needs to be executed or not. Pointcut uses different kinds of expressions that are matched with the join points. Spring framework uses the AspectJ pointcut expression language for determining the join points where advice methods will be applied.
+	4) If you are using auto wiring and using BeanFactory than you need to register AutoWiredBeanPostProcessor using API which you can configure in XML if you are using  ApplicationContext. In summary BeanFactory is OK for testing and non production use but ApplicationContext is more feature rich container implementation and should be favored over BeanFactory
 
-    Join Point: A join point is the specific point in the application such as method execution, exception handling, changing object variable values etc. In Spring AOP a join points is always the execution of a method.
+	public static void main(String args[]){
+	ApplicationContext ctx =new ClassPathXmlApplicationContext("beans.xml");
+	Hello hello =(Hello) ctx.getBean("hello");
+	hello.sayHello("John");
+	}
 
-    Advice Arguments: We can pass arguments in the advice methods. We can use args() expression in the pointcut to be applied to any method that matches the argument pattern. If we use this, then we need to use the same name in the advice method from where argument type is determined.
+	here beans.xml is your spring configuration file and “hello” is a bean defined in that spring configuration file. Here we have used ClassPathXmlApplicationContext  which is an implementation of ApplicationContext interface in Spring.
+
+
+7.what is waving and types of waving:
+http://www.baeldung.com/aspectj
+
 
 8.What is the difference between Spring AOP and AspectJ AOP?
 
@@ -68,7 +69,7 @@ Some of the advantages of using Spring Framework are:
         Spring AOP supports AspectJ annotations, so if you are familiar with AspectJ then working with Spring AOP is easier.
         Spring AOP supports only proxy-based AOP, so it can be applied only to method execution join points. AspectJ support all kinds of pointcuts.
         One of the shortcoming of Spring AOP is that it can be applied only to the beans created through Spring Context.
-
+		
 9.What is Spring IoC Container?
 
     Inversion of Control (IoC) is the mechanism to achieve loose-coupling between Objects dependencies. To achieve loose coupling and dynamic binding of the objects at runtime.
@@ -127,7 +128,7 @@ Some of the advantages of using Spring Framework are:
         prototype: A new instance will be created every time the bean is requested.
         request: This is same as prototype scope, however it’s meant to be used for web applications. A new instance of the bean will be created for each HTTP request.
         session: A new bean will be created for each HTTP session by the container.
-        global-session: This is used to create global session beans for Portlet applications.
+        global-session: This is used to create global session beans for Portlet applications.(pluggable applications like news, forum , weather report m email)
 
     Spring Framework is extendable and we can create our own scopes too, however most of the times we are good with the scopes provided by the framework.
 
@@ -135,17 +136,61 @@ Some of the advantages of using Spring Framework are:
 
 14.What is Spring Bean life cycle?
 
-    Spring Beans are initialized by Spring Container and all the dependencies are also injected. When context is destroyed, it also destroys all the initialized beans. This works well in most of the cases but sometimes we want to initialize other resources or do some validation before making our beans ready to use. Spring framework provides support for post-initialization and pre-destroy methods in spring beans.
+	1) Spring container looks for the definition of the bean in the spring configuration xml file
 
-    We can do this by two ways – by implementing InitializingBean and DisposableBean interfaces or using init-method and destroy-method attribute in spring bean configurations.
+	2) Spring instantiate the bean by calling no argument default constructor of that class,
+	If there is only parameterized constructor in the class , then bean must be defined in spring xml file with constructor injection using which container will instantiate the bean otherwise it will throw bean creation exception.
+
+	2) Spring injects the values and references if any into bean’s properties.
+
+	3) If the bean implements BeanNameAware interface, Spring passes the bean’s ID to the setBeanName () method and executes this method.
+
+	4)If the bean implements BeanClassLoaderAware interface, Spring passes the bean’s instance to the setBeanClassLoader () method and executes this method
+	
+	5) If the bean implements BeanFactoryAware interface, Spring calls the setBeanFactory () method, passing in the bean factory itself and executes this method.
+
+	6) If the bean implements ApplicationContextAware interface, Spring will call the setApplicationContext () method, passing in a reference to the current application context and executes this method.
+
+	7) If the bean implements the BeanPostProcessor interface, Spring calls their postProcessBeforeInitialization () method
+
+	8) Now the method annotated with @PostConstruct is called.  
+	
+	9)If the bean implements the InitializingBean interface, Spring calls afterPropertiesSet() method after all the properties of that bean are set.
+	Similarly, if the bean is declared with an init-method, then the specified initialization method will be called
+
+	10) If the bean implements BeanPostProcessor, Spring will call their postProcessAfterInitialization() method.
+	
+	11) At this point, the bean is ready to be used by the application and will remain in the application context until the application context is destroyed.
+	
+	12)Now when the ApplicationContext shuts down such as by using registerShutdownHook() then the method annotated with @PreDestroy is called. 
+	
+	) If the bean implements the DisposableBean interface, then Spring will call the destroy() method. Likewise, if any bean was declared with a destroy-method, then the specified method will be called.
+	
+	14)Before garbage collection, finalize() method of Object is called.
 
 15.How to get ServletContext and ServletConfig object in a Spring Bean?
 
     There are two ways to get Container specific objects in the spring bean.
-        Implementing Spring *Aware interfaces, for these ServletContextAware and ServletConfigAware interfaces, for complete example of these aware interfaces, please read Spring Aware Interfaces
-        Using @Autowired annotation with bean variable of type ServletContext and ServletConfig. They will work only in servlet container specific environment only though.
+		1.Implementing Spring *Aware interfaces, for these ServletContextAware and ServletConfigAware interfaces:
+				public class HomeController implements ServletContextAware, ServletConfigAware {
 
-        @Autowired
+		private ServletContext context;
+		private ServletConfig config;
+
+		@Override
+		public void setServletConfig( ServletConfig servletConfig) {
+		this.config = servletConfig;
+
+		}
+
+		@Override
+		public void setServletContext(ServletContext servletContext) {
+		this.context = servletContext;
+		}
+		
+		2.Using @Autowired annotation with bean variable of type ServletContext and ServletConfig. They will work only in servlet container specific environment only though.
+	
+		@Autowired
         ServletContext servletContext;
 
 16.What is Bean wiring and @Autowired annotation?
@@ -165,7 +210,7 @@ Some of the advantages of using Spring Framework are:
 
 17.Does Spring Bean provide thread safety?
 
-    The default scope of Spring bean is singleton, so there will be only one instance per context. That means that all the having a class level variable that any thread can update will lead to inconsistent data. Hence in default mode spring beans are not thread-safe.
+    The default scope of Spring bean is singleton, so there will be only one instance per context. That means that class level variable that any thread can update will lead to inconsistent data. Hence in default mode spring beans are not thread-safe.
 
     However we can change spring bean scope to request, prototype or session to achieve thread-safety at the cost of performance. It’s a design decision and based on the project requirements.
 
@@ -217,15 +262,14 @@ Some of the advantages of using Spring Framework are:
         Controller Based – We can define exception handler methods in our controller classes. All we need is to annotate these methods with @ExceptionHandler annotation.
         Global Exception Handler – Exception Handling is a cross-cutting concern and Spring provides @ControllerAdvice annotation that we can use with any class to define our global exception handler.
         HandlerExceptionResolver implementation – For generic exceptions, most of the times we serve static pages. Spring Framework provides HandlerExceptionResolver interface that we can implement to create global exception handler. The reason behind this additional way to define global exception handler is that Spring framework also provides default implementation classes that we can define in our spring bean configuration file to get spring framework exception handling benefits.
+   For a complete example, please read Spring Exception Handling Example.
 
-    For a complete example, please read Spring Exception Handling Example.
+24: What is the difference between @Controller and @RestController in Spring MVC? (answer)
+Even though both are used to indicate that a Spring bean is a Controller in Spring MVC setup, @RestController is better when you are developing RESTful web services using Spring MVC framework. It's a combination of @Controller + @ResponseBody annotation which allows the controller to directly write the response and bypassing the view resolution process, which is not required for RESTful web service. 
 
-24.How to create ApplicationContext in a Java Program?
+It also instructs DispatcherServlet to use different HttpMessageConverters to represent the response in the format client is expecting e.g. HttpMessageJackson2Convert to represent response in JSON format and JAXB based message converts to generate XML response
 
-    There are following ways to create spring context in a standalone java program.
-        AnnotationConfigApplicationContext: If we are using Spring in standalone java applications and using annotations for Configuration, then we can use this to initialize the container and get the bean objects.
-        ClassPathXmlApplicationContext: If we have spring bean configuration xml file in standalone application, then we can use this class to load the file and get the container object.
-        FileSystemXmlApplicationContext: This is similar to ClassPathXmlApplicationContext except that the xml configuration file can be loaded from anywhere in the file system.
+
 
 25.Can we have multiple Spring configuration files?
 
@@ -368,13 +412,9 @@ Some of the advantages of using Spring Framework are:
         @Configuration, @ComponentScan and @Bean – for java based configurations.
         AspectJ annotations for configuring aspects and advices, @Aspect, @Before, @After, @Around, @Pointcut etc.
 
-31.Can we send an Object as the response of Controller handler method?
+31.
 
-    Yes we can, using @ResponseBody annotation. This is how we send JSON or XML based response in restful web services.
-
-32.How to upload file in Spring MVC Application?
-
-    Spring provides built-in support for uploading files through MultipartResolver interface implementations. It’s very easy to use and requires only configuration changes to get it working. Obviously we would need to write controller handler method to handle the incoming file and process it. For a complete example, please refer Spring File Upload Example.
+32.
 
 33.How to validate form data in Spring Web MVC Framework?
 
@@ -389,24 +429,6 @@ Some of the advantages of using Spring Framework are:
     We can create spring interceptor by implementing HandlerInterceptor interface or by extending abstract class HandlerInterceptorAdapter.
 
     We need to configure interceptors in the spring bean configuration file. We can define an interceptor to intercept all the client requests or we can configure it for specific URI mapping too. For a detailed example, please refer Spring MVC Interceptor Example.
-
-35.What is Spring JdbcTemplate class and how to use it?
-
-    Spring Framework provides excellent integration with JDBC API and provides JdbcTemplate utility class that we can use to avoid bolier-plate code from our database operations logic such as Opening/Closing Connection, ResultSet, PreparedStatement etc.
-
-    For JdbcTemplate example, please refer Spring JDBC Example.
-
-36.How to use Tomcat JNDI DataSource in Spring Web Application?
-
-    For using servlet container configured JNDI DataSource, we need to configure it in the spring bean configuration file and then inject it to spring beans as dependencies. Then we can use it with JdbcTemplate to perform database operations.
-
-    Sample configuration would be:
-
-    <beans:bean id="dbDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
-        <beans:property name="jndiName" value="java:comp/env/jdbc/MyLocalDB"/>
-    </beans:bean>
-
-    For complete example, please refer Spring Tomcat JNDI Example.
 
 37.How would you achieve Transaction Management in Spring?
 
@@ -477,13 +499,19 @@ Some of the advantages of using Spring Framework are:
 43.What are some of the best practices for Spring Framework?
 
     Some of the best practices for Spring Framework are:
-        Avoid version numbers in schema reference, to make sure we have the latest configs.
         Divide spring bean configurations based on their concerns such as spring-jdbc.xml, spring-security.xml.
-        For spring beans that are used in multiple contexts in Spring MVC, create them in the root context and initialize with listener.
         Configure bean dependencies as much as possible, try to avoid autowiring as much as possible.
         For application level properties, best approach is to create a property file and read it in the spring bean configuration file.
         For smaller applications, annotations are useful but for larger applications annotations can become a pain. If we have all the configuration in xml files, maintaining it will be easier.
         Use correct annotations for components for understanding the purpose easily. For services use @Service and for DAO beans use @Repository.
         Spring framework has a lot of modules, use what you need. Remove all the extra dependencies that gets usually added when you create projects through Spring Tool Suite templates.
-        If you are using Aspects, make sure to keep the join pint as narrow as possible to avoid advice on unwanted methods. Consider custom annotations that are easier to use and avoid any issues.
+        If you are using Aspects, make sure to keep the join pint as narrow as possible to avoid advice on unwanted methods. 
         Use dependency injection when there is actual benefit, just for the sake of loose-coupling don’t use it because it’s harder to maintain.
+
+44)Aware Interfaces with example:
+ http://javainsimpleway.com/spring-aware-interfaces-for-beans/
+http://javainsimpleway.com/beannameaware-messagesourceaware-and-resourceloaderaware/
+
+1.Spring program for transaction management, JDBC operations, File uploading, Exception Handling , Localization
+2. implementation of of  DI
+3.
