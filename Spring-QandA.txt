@@ -255,7 +255,8 @@ http://www.baeldung.com/aspectj
     MultipartResolver interface is used for uploading files – CommonsMultipartResolver and StandardServletMultipartResolver are two implementations provided by spring framework for file uploading. By default there are no multipart resolvers configured but to use them for uploading files, all we need to define a bean named “multipartResolver” with type as MultipartResolver in spring bean configurations.
 
     Once configured, any multipart request will be resolved by the configured MultipartResolver and pass on a wrapped HttpServletRequest. Then it’s used in the controller class to get the file and process it. For a complete example, please read Spring MVC File Upload Example.
-
+	https://www.javatpoint.com/spring-mvc-file-upload
+	
 23.How to handle exceptions in Spring MVC Framework?
 
     Spring MVC Framework provides following ways to help us achieving robust exception handling.
@@ -263,13 +264,13 @@ http://www.baeldung.com/aspectj
         Global Exception Handler – Exception Handling is a cross-cutting concern and Spring provides @ControllerAdvice annotation that we can use with any class to define our global exception handler.
         HandlerExceptionResolver implementation – For generic exceptions, most of the times we serve static pages. Spring Framework provides HandlerExceptionResolver interface that we can implement to create global exception handler. The reason behind this additional way to define global exception handler is that Spring framework also provides default implementation classes that we can define in our spring bean configuration file to get spring framework exception handling benefits.
    For a complete example, please read Spring Exception Handling Example.
+https://spring.io/blog/2013/11/01/exception-handling-in-spring-mvc
+https://www.mkyong.com/spring-mvc/spring-mvc-exceptionhandler-example/
 
 24: What is the difference between @Controller and @RestController in Spring MVC? (answer)
 Even though both are used to indicate that a Spring bean is a Controller in Spring MVC setup, @RestController is better when you are developing RESTful web services using Spring MVC framework. It's a combination of @Controller + @ResponseBody annotation which allows the controller to directly write the response and bypassing the view resolution process, which is not required for RESTful web service. 
 
 It also instructs DispatcherServlet to use different HttpMessageConverters to represent the response in the format client is expecting e.g. HttpMessageJackson2Convert to represent response in JSON format and JAXB based message converts to generate XML response
-
-
 
 25.Can we have multiple Spring configuration files?
 
@@ -440,6 +441,7 @@ It also instructs DispatcherServlet to use different HttpMessageConverters to re
         class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
+https://www.journaldev.com/2603/spring-transaction-management-jdbc-example
 
 38.What is Spring DAO?
 
@@ -464,6 +466,7 @@ It also instructs DispatcherServlet to use different HttpMessageConverters to re
     It’s very beneficial and easy to use Spring security in web applications, through the use of annotations such as @EnableWebSecurity. You should go through following posts to learn how to use Spring Security framework.
         Spring Security in Servlet Web Application
         Spring MVC and Spring Security Integration Example
+		example:https://www.mkyong.com/spring-security/spring-security-hello-world-annotation-example/
 
 41.How to inject a java.util.Properties into a Spring Bean?
 
@@ -519,6 +522,7 @@ https://www.mkyong.com/spring-mvc/spring-mvc-exceptionhandler-example/
 https://www.javatpoint.com/spring-mvc-file-upload
 
 https://www.journaldev.com/2603/spring-transaction-management-jdbc-example
+
 2. implementation of of  DI
 3.
 
@@ -526,8 +530,7 @@ Can you inject null and empty string values in Spring?
 Yes, you can.
 Describe some of the standard Spring events.
 > target Object is a proxy object that is advised by one or more aspects
-Q15. What is Spring Security?
-example:https://www.mkyong.com/spring-security/spring-security-hello-world-annotation-example/
+
 
 Spring 2.5: This version was released in 2007. 
 Spring 3.0: This version was released in 2009.
