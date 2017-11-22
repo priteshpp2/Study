@@ -521,3 +521,42 @@ https://www.javatpoint.com/spring-mvc-file-upload
 https://www.journaldev.com/2603/spring-transaction-management-jdbc-example
 2. implementation of of  DI
 3.
+
+Can you inject null and empty string values in Spring?
+Yes, you can.
+Describe some of the standard Spring events.
+> target Object is a proxy object that is advised by one or more aspects
+Q15. What is Spring Security?
+example:https://www.mkyong.com/spring-security/spring-security-hello-world-annotation-example/
+
+Spring 2.5: This version was released in 2007. 
+Spring 3.0: This version was released in 2009.
+Spring 4.0  - 2013
+Spring 3.0	
+New features in Spring 3.0 compare to its previous version:
+- Spring MVC Test Framework
+- Asynchronous MVC processing on Servlet 3.0
+- custom @Bean definition annotations in @Configuration classes
+- @Autowired and @Value to be used as meta-annotations
+- Concurrency refinements across the framework
+- Loading WebApplicationContexts in the TestContext framework
+
+Spring 4.0
+- JCache 0.5 (JSR-107)	New features in Spring 4.0 compare to Spring 3.0:
+- JSR-335 Lambda expressions
+- JSR-310 Date-Time value types for Spring data binding and formatting.
+- JSR-343 JMS 2.0.
+- JSR-338 JPA 2.1.
+- JSR-349 Bean Validation 1.1.
+- JSR-236 Java EE 7 Enterprise Concurrency support.
+- JSR-356 Spring’s WebSocket endpoint mode.
+- Configuring and implementing Spring style application using Groovy 2. Also they specify that first class support for the Groovy applications.
+- Also spring plans to add the HATEOS (Hypermedia as the Engine of Application State) support for REST APIs.
+
+40) What are the different types of AutoProxying?
+
+Following are the different types of AutoProxying:
+BeanNameAutoProxyCreator
+DefaultAdvisorAutoProxyCreator
+example :
+https://www.packtpub.com/books/content/autoproxy-spring-aspect-oriented-programming-aop
