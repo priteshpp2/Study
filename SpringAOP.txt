@@ -1,0 +1,190 @@
+8.What do you understand by Aspect Oriented Programming?
+
+Enterprise applications have some common cross-cutting concerns that is applicable for different types of Objects and application modules, such as logging, transaction management, data validation, authentication etc. In Object Oriented Programming, modularity of application is achieved by Classes whereas in AOP application modularity is achieved by Aspects and they are configured to cut across different classes methods.
+
+AOP takes out the direct dependency of cross-cutting tasks from classes that is not possible in normal object oriented programming. For example, we can have a separate class for logging but again the classes will have to call these methods for logging the data. 
+
+9.What is Aspect, Advice, Pointcut, JointPoint and Advice Arguments in AOP?
+
+Aspect: Aspect is a class that implements cross-cutting concerns, such as transaction management. Aspects can be a normal class configured and then configured in Spring Bean configuration file or we can use Spring AspectJ support to declare a class as Aspect using @Aspect annotation.
+
+Advice: Advice is the action taken for a particular join point. In terms of programming, they are methods that gets executed when a specific join point with matching pointcut is reached in the application. You can think of Advices as Spring interceptors or Servlet Filters.
+
+Pointcut: Pointcut are regular expressions that is matched with join points to determine whether advice needs to be executed or not. Pointcut uses different kinds of expressions that are matched with the join points. Spring framework uses the AspectJ pointcut expression language for determining the join points where advice methods will be applied.
+
+Join Point: A join point is the specific point in the application such as method execution, exception handling, changing object variable values etc. In Spring AOP a join points is always the execution of a method.
+
+Advice Arguments: We can pass arguments in the advice methods. We can use args() expression in the pointcut to be applied to any method that matches the argument pattern. If we use this, then we need to use the same name in the advice method from where argument type is determined.
+
+
+1.why AOP ? 
+
+	if we want to call same methode from all the classes 
+
+	problem in OOP:
+	1.too many relationship to cross cutting objects
+	2.call is stil required in all methode
+	3.cant all be changed at onece ex: if we want to change the method name
+
+	solution:
+	create Aspects like logging and security and transaction
+	then create AspectConfiguration - spring reads this configuration which tells which aspects applies to which methods. so no need to change classes
+
+	common cross cutting concern : logging, security and transaction
+
+2.Setting UP AOP dependencies
+
+	1.create project
+	2.add aspectj jars(aspectjrt and aspectjwaver jar),add aopalliance jar, add cgilib jar, add asm jar in library. and all spring distributions jars.
+
+3.writting 1st AOP :
+
+	a.convert class into aspect using @Aspect annotation and the methods will become advise.
+	b.add annotation to the method accrding to requirement @before --> i want loggingadvise methode to run before getname(this tells when to do)
+	
+	ex: 
+	class loggingAspect
+	{
+		@Before("execution(public string getName())")  -- >
+		public void loggingadvise()
+		{
+			///////////
+		}
+	}
+	c. <aop:aspect:autoproxy/> : this tag will tells spring we are using Aspect oriented programming if you find any advise do configure them
+	d. crate bean of loggingAspect class
+	
+4.Pointcut and wildcard expression
+
+	A.to call the getname method of perticular class :
+	- @Before("execution(public string pckgname.classname.getName())")
+	
+	B.apply this advise to differnt differnt methods of differnt names.
+	-we can do this using wildcards like * 
+	@Before("execution(public * get*())") -  all the methods starts with get and any return type
+	
+	C.for any no of arguments :
+	@Before("execution(public string getName(..))") - it can 0 or any no of arguments
+	@Before("execution(public string getName(*))") - 1 or more arguments
+	
+	
+	D.Pointcuts : for all the points in your code where you want this advise methode to cut in
+	@Before("execution(public * get*())") --> public * get*() --> this is the pointcut
+	
+	E.@pointcut annotation : if multiple advices have same kind of pointcut then combine this pointcuts using this annotation
+	ex:
+	@pointcut("execution(public * get*())")
+	public void getallmethods() - this is dummy method to hold pointcut
+	{}
+	-->replace this method name with execution(jkhgsigh)
+	
+	F.apply advice to all methods of circle class:
+	- @pointcut(execution(* * pakgname.classname.*(. . )))
+	or
+	-@pointcut("Within(pakgname.classname)")
+	
+	G. "." means all the classes package but not subpacakge
+	@pointcut("Within(pakgname.*)")
+	
+	
+	H. ".." means package and subpacakge
+	@pointcut("Within(pakgname..*)")
+	
+	I.try to combine two pointcuts if possible this is good practice. ex : @before("allmethodsofcircle && all getters") - this means call all getters of circle
+	
+5.JointPoint and Advise argument
+
+JointPoint : if you want your advise to perform differently for differnt methods of same pointcut
+			 jointpoint have inforamtion about the methode which will trigger the call for advise.
+			 def : all the point in your code you where you want to apply advise
+			 
+			 ex : please refer joinpoint screenshot
+			 
+			 **using aspectj we can run advise for member variable also
+			
+			@Before(args(string)) - this advise is called for all the methods with string argument
+			public void stringargument()
+			{}
+			
+			@Before(args(name)) - this advise is called for all the methods with string argument and we can access to argument value in the advise at runtime
+			public void stringargument(string name)
+			{
+				sop(name)
+			}
+
+6.After Advice Types
+
+	Note: Advise methods run only when we call the target methods, it will not run if the target method is called by string container.
+	@-Before , @After - java.aspectj.lang.annotation package.			
+	
+	advise called only when if target methods run sucessfully and return 
+	@afterreturning
+	
+	advise called only when if target methods throws and exception 
+	@afterthrowing
+	
+	@after - works like finally
+	
+	Ex:
+	public String setnameReturn(String name)
+	{
+		this.name = name;
+		return name
+
+	}
+	
+	@AfterReturning("args(name)") // we can get argument value here
+	public void stringargument(string name)
+	{
+		sop(name)
+	}
+	
+	@AfterReturning(pointcut="args(name)",returning = "returningString") // we can get argument and return value both value 
+	public void stringargument(string name, string returningString) // if we write object returningString it will catch all retruntype but for string
+	{
+		sop(name  + returningString)
+	}
+	
+		@AfterReturning(pointcut="args(name)",throwing = "ex") // 
+	public void stringargument(string name, RuntimeException ex returningString) // 
+	{
+		sop(name  + returningString)
+	}
+	
+	
+7.Around Advice Types  -  it is more powerful than before and after
+
+	if user want to execute code before and after target method then user can use around advise method.
+
+	to decide before and after , around method takes preccedingjointpoint as an argument
+	//before code
+		preceedingjointpoinr.proceed();
+	//after code
+
+	we can change return value using advise./
+	Note**:coding guidlines says use the advise which is sufficefict and necessceray (Dont use around everytime if not required)
+
+8.Custom annotation :
+
+	if user want apply advise to multiple differnt methods like more than 10 then instead of using && we can used custom annotaion Loggable .
+	refer screenshot for example
+
+9. AOP XML configuration
+
+	we can use xml to configure Aspect.
+	when to use what ?
+	
+	@Aspect   -- > <aop:aspect id="loggingaspect" ref"loggingaspect"></aop:aspect>
+	screenshot
+	scrrenshot(inline pointcut expression - no need to give reference)
+	
+	if you treat aspect as an configuration then use xml
+	if you treat aspect as an functionality then use xml
+	
+10.understading AOP proxies 
+	
+	
+
+
+
+	
