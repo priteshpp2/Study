@@ -1,0 +1,70 @@
+
+Question 3: what is Bean Factory, have you used XMLBeanFactory?
+Ans: BeanFactory is factory Pattern which is based on IOC design principles.it is used to make a clear separation between application configuration and dependency from actual code. The XmlBeanFactory is one of the implementations of Bean Factory which we have used in our project. The org.springframework.beans.factory.xml.XmlBeanFactory is used to create bean instance defined in our XML file.
+BeanFactory factory = new XmlBeanFactory(new FileInputStream("beans.xml"));
+Or
+ClassPathResource resorce = new ClassPathResource("beans.xml");
+XmlBeanFactory factory = new XmlBeanFactory(resorce);
+
+
+Question 7: What is the role of DispatcherServlet in Spring MVC? (answer)
+The DispatcherServlet is very important from Spring MVC perspective, it acts as a FrontController i.e. all requests pass through it. It is responsible for routing the request to controller and view resolution before sending the response to the client. When Controller returns a Model or View object, it consults all the view resolvers registered to find the correct type of ViewResolver which can render the response for clients. 
+
+In case of RESTful Web Services, the DispatcherServlet is also responsible for using HttpMessageConverts to represent the response in the JSON, XML, or TEXT format, depending on the content negotiation between Client and Server e.g. if client send request with HTTP accept header as "application/json" then DispatcherServlet will ask the HttpMessageJackson2Converter to convert the response into JSON format.  
+
+Question 10: Difference between the setter and constructor injection in Spring? (answer)
+Setter injection is more flexible than constructor injection because you must remember the type and order of constructor parameter. Also, constructor injection is generally used to inject the mandatory dependency, while setter can be used to inject optional dependency.
+
+Partial dependency: can be injected using setter injection but it is not possible by constructor. Suppose there are 3 properties in a class, having 3 arg constructor and setters methods. In such case, if you want to pass information for only one property, it is possible by setter method only.
+Overriding: Setter injection overrides the constructor injection. If we use both constructor and setter injection, IOC container will use the setter injection.
+Changes: We can easily change the value by setter injection. It doesn't create a new bean instance always like constructor. So setter injection is flexible than constructor injection.
+
+11-ref vs idref
+ref is used to pass the bean that the ref refers to.
+idref is used to pass the name of the bean (as a String) that is referred to.
+
+12-innerbean and alias
+
+13-DI with collection
+
+14-Spring-MVC-architecture
+http://www.java4s.com/spring-mvc/spring-mvc-execution-flow-diagram-spring-mvc-3-2-flow/
+https://www.javatpoint.com/spring-3-mvc-tutorial
+
+15-ApplicationContextAware
+-https://www.concretepage.com/spring/example_applicationcontextaware_spring
+ApplicationContextAware is used for bean lookup purpose and for those objects which needs to access file resources. 
+
+16-BeanDefinitionInheritance
+<bean id="inheritedTestBean" abstract="true"
+    class="org.springframework.beans.TestBean">
+  <property name="name" value="parent"/>
+  <property name="age" value="1"/>
+</bean>
+
+<bean id="inheritsWithDifferentClass"
+      class="org.springframework.beans.DerivedTestBean"
+      parent="inheritedTestBean" init-method="initialize">
+    
+  <property name="name" value="override"/>
+  <!-- the age property value of 1 will be inherited from  parent -->
+</bean>
+
+17-Lifecyclecallbacks - Running of methods before initilizaing bean and at the time of bean is going to destroy 
+It works same like initializing and destroying a bean using the Spring configuration init-method and destroy-method.
+In Spring, InitializingBean and DisposableBean are two marker interfaces, a useful way for Spring to perform certain actions upon bean initialization and destruction.
+
+    For bean implemented InitializingBean, it will run afterPropertiesSet() after all bean properties have been set.
+    For bean implemented DisposableBean, it will run destroy() after Spring container is released the bean.
+
+
+18-BeanPostProcessors and BeanFactoryPostProcessor
+
+19-@Required @Autowired @Qualifier
+
+20-ViewResolver and multipartresolver
+
+21-MVC interceptor
+http://javapapers.com/spring/spring-mvc-handler-interceptor/
+
+22-ContextLoaderListener
