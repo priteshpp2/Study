@@ -62,7 +62,6 @@ a++; (is not idempotent)
 
 Idempotency is important in building a fault-tolerant API. Suppose a client wants to update a resource through POST. Since POST is not a idempotent method, calling it multiple times can result in wrong updates. What would happen if you sent out the POST request to the server, but you get a timeout. Is the resource actually updated? Does the timeout happened during sending the request to the server, or the response to the client? Can we safely retry again, or do we need to figure out first what has happened with the resource? By using idempotent methods, we do not have to answer this question, but we can safely resend the request until we actually get a response back from the server.
 
-
 Explain the term ‘Addressing’ with respect to RESTful WEB service.
 Just like we require address with postal code to reach any person, in the same way, ‘Addressing’ locates resources that are present on the server for the purpose of hosting web services. This is usually done with URI i.e. Unified Resource Identifier.
 
@@ -133,23 +132,6 @@ Some of the implementations of JAX-RS are:
     Apache CFX
     Play
 
-Q28 What is the Restlet framework?
-
-Restlet is a lightweight, comprehensive, open source RESTful web API framework for the Java platform. 
-It has advantages such as
-
-    websocket and server-sent events support; 
-    HTTP/2 support; 
-    transparent HTTP PATCH support; 
-    client cache service; 
-    fluent APIs.
-3) What is Restlet framework ?
-Restlet is leading RESTful web framework for Java applications is used to build RESTFul web services it has two part Restlet API and a Restlet implementation much like Servlet specification. There are many implementation of Restlet framework available you just need to add there jar in your classpath to use them. By using Restlet web framework you can write client and server.
-
-5) Can you use Restlet without any web-container ?
-Yes, Restlet framework provide default server which can be used to handle service request in web container is not available.
-
-http://restlet.com/
 
 Q29 What is the Jersey framework?
 
@@ -183,17 +165,6 @@ ex:
 	  
 Actually client generation is the minor feature of the contract definition. It's just a toy. Contract enforces bad communicators to communicate integration rules clearly. This is the main reason to use WADL or Open Specification or whatever.
 
-
-Q30 What is the RESTeasy framework?
-
-RESTeasy is a JBoss project, which implements of the JAX-RS specification. It has benefits such as 
-
-    fully certified JAX-RS implementation; supports HTTP 1.1 caching semantics including cache revalidation; 
-    JAXB marshalling into XML, JSON, Jackson, Fastinfoset, and Atom as well as wrappers for maps, arrays, lists, and sets of JAXB Objects; 
-    OAuth2 and Distributed SSO with JBoss AS7; 
-    rich set of providers for: XML, JSON, YAML, Fastinfoset, Multipart, XOP, Atom, etc. 
-
-http://resteasy.jboss.org/
 
 11) What is difference between top-down and bottom-up approach of developing web services ?
 In top-down approach first WSDL document is created and than Java classes are developed based on WSDL contract, so if WSDL contract changes you got to change your Java classes while in case of bottom up approach of web service development you first create Java code and then use annotations like @WebService to specify contract or interface and WSDL field will be automatically generated from your build.
