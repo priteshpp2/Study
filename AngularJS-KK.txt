@@ -1,0 +1,89 @@
+Angular JS:
+
+1.Declarative vs Imperative programming
+
+With imperative programming, you tell the compiler what you want to happen, step by step. (HOW to do IT)
+ex:
+to center the para in html we write the code:
+width of browser 40
+width of para 20
+width of browser/2 20
+width of para/2  10
+postion the para into the middle of browser
+
+
+With declarative programming, on the other hand, you write code that describes what you want, but not necessarily how to get it (declare your desired results, but not the step-by-step)(What to do)
+
+ex: sombody already writes the logic for this :
+align:center
+
+2. Angular comes with some directives/elements or we can create our own and use these elements or directives everywhere in the HTML page.
+
+3. Directives :
+ ng-app :Auto-bootstrap as angular js application
+		root elements of the application
+		if there is multiple ng-app per oage then we have to do manual bootstrap
+			
+ng-init:initialize code 
+		evalute expression
+		not recommeded to use
+
+ng-if:removes and recreates the portion on DOM tree based on the expression
+	if its true it add the element
+	if false it remove the element
+	
+4.how all the directives communicates with each other : it communicates using scope.
+scope is like object and all the variables are the properties of that object. ex: scope.hoursofday
+
+5.ng-bind  or {{}} - to use the initialized value
+
+6.Its mandatory to register funtion as controller to use that function nad then use that controller name in ng-controller.
+we have to specify the module name in the ng-app.
+
+7.angular.module : global space for creating , registering and retriving angular modules
+module is the collectin of controller,directives and other stuff
+//ex create a new module
+var module = angular.module("myApp", []);
+//use module
+ng-app= "myApp"
+//register controller with module	
+	var module = angular.module("myApp", []);
+	module.controller("mainctrl",main) // register
+	function main()
+	{
+		console.log("main called")
+	}
+
+//use controller name:
+ng-controller="mainctrl"
+
+8. refer index2
+anguler inject scope while calling this method (for that you have to pass $socpe in the method)
+ex : function main($scope)
+
+9.by using ng-click instaed of onclick we get the scope
+refer clock example:
+we get the scope of all variables like ex: time
+you can directly change the value of variable from controller  and you get the value in view so here we get the feature of data-binding
+
+10. In 9th point we have updated the variable from controller and you get the value in view
+	as angular provided two way data binding
+	you can update the variable from view and you get the value in controller using ng-modelex: username exmple in clock.html file
+
+11.nested controller and scope hierarchy
+
+: with saperate controller we get saperate scope objects
+if we dont have controller in html then still we have global scope object
+
+imp:in nested controller : inner controller is having its own scope and outer controller having its own scope.
+if both are using property with the same name then if outer controller not found its property then its not gets printed but if inner controller not found its property then its get value from outer controller. (if not found it look into root scope)
+when you have nested controller then there are nested scope
+
+12.ng-controller syntax not recommeded
+use controller as syntax:
+benifits:
+you get scope for free no need to give argument as scope in function
+its very flexible to access scope using alias
+
+
+			
