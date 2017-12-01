@@ -1,0 +1,104 @@
+1.MQL:
+	mod form LSAUserCredentialsForm field mod name Comments remove setting Validate;
+	modify channel "" place "" after "";
+
+
+SCM:
+BusinessObjects:
+	Relationship:from type , totype, triger, attribute
+	type:attibute , trigger
+	Interface: allowd type , allowed relationship , attribute
+	person :privilage(access), assignment(role)
+	policy:allowedtype,state,stateaccess
+	
+	Command: link:emxIndentedTable.jsp,tablename,menuname,progfunctioon 
+			 setting:accessexpression,targetlocation  
+			 objectaccess(username)
+	Menu: link (form.jsp, portal.jsp), setting , items 
+	
+	Portal:link (Not defined), setting , items 
+	Channel:link (Not defined), setting , items 
+	
+	Form: 
+		field:Expression($<attribute[attribute_ABC].value>),link(href) setting(groupname , inputtype, access funtion/program),access
+		
+	Table: 
+		column:Expression($<attribute[attribute_ABC].value>),link(href:tree.jsp) setting(groupname , inputtype, access funtion/program),access
+TCL:
+
+a.tcl;
+	eval {
+	proc utLoad { sProgram } {
+	  set sDir "$env(TCL_LIBRARY)/mxTclDev"
+			set pFile [ open "$sDir/$sProgram" r ]
+			set sOutput [ read $pFile ]
+			close $pFile
+				return $sOutput
+	}
+	eval [utLoad eServiceSchemaVariableMapping.tcl]
+
+	set lCmd [ list		$lList_AISaveToEnovia \
+
+	set lList_AISaveToEnovia \
+		[ list {ADD COMMAND} \
+			{version=R207} \
+			{name=AISaveToEnovia} \
+		]
+		
+	set mqlret [emxInstallAdmin $lCmd $Item]
+		return -code $mqlret ""
+
+b.	eServiceApplicationGetVersion / eServiceApplicationSetVersion  eServiceSystemInformation.tcl applicationname version
+
+c.	set lInstalledApplication [mql exec prog eServiceHelpAbout.tcl]
+	set SourcingInstalled [string first "|SourcingCentral|" $lInstalledApplication]
+	
+d.	set lVersions [emxIniGetKeys "$sFullDir/AppInstall/AppInfo/AppInfo.rul" "VERSION_LIST"]
+
+e.	set mqlret [eServiceRunInstallPrograms $lPrograms "$sApplication"]
+
+Migration:
+	a.Object Migration : if we create type material in 15x and we have replace the type with Raw Material in 18. then we have migrate all old objects with the type material.
+	- relationship: 1st find the objects with the old relationship then then copy all the attribute from that relationship then disconect both the objects then aconnect both objects with new relationshiop then add all the attribiutes we have added into the map.
+
+PreUpgradeScript:
+	this script required when if we have created raw material type in 15x then from 18x if BPS is taking responsibility of creation of that object so while migratiing from 15 to 18 BPS installtion gets failed beacause that type is already available in the system so we run preupgrade scipt to remove old type from database.
+
+PostInstall:
+	if 15x if we have added 3 commands in menu then in 18x we have created new commands which do the same job and we have removed old commands from the plain installation of 18 then in that case we required post install otherwise at at time 6 commnds gets visible.
+
+JUnit:
+	we use ECLemma for the code covrage.
+	JUnit4
+		mkSetEnoviaEnv -i  R420relhuxdevpril305
+	Execute Respective ODT
+		mkodt -s UIInstallerHFTestCase.sh -X -NOMaxTime -F ENOUIInstaller.tst
+	
+EBOM:part to part structure
+
+StructureBrowser:
+sortDirection
+showRMB
+rowGrouping
+freezePane
+expandfilter
+direction
+
+Spinner:
+
+	tcl;
+	eval
+	{
+		for {set i 0} {$i < 10} {incr i} {
+		mql add bus "Raw Material" "Fabric"+$i 1 policy "" vault "";
+		}
+	}
+ProjectInfo: My project name is consumer good and retail we have two subteams for two products in the project one is working on the server side and other one is working on the client side.
+client side team work on enovia integration with adoabe illustraotr.and from 15x i worked in this team from the scratch
+Server side working of manage the life cycle of cosumer goods product based on enovia. from 12x
+myntra fossil newblabce peterengland UBC reliabce
+
+JPO:
+getrelated
+getinfo
+findobject
