@@ -1,0 +1,4 @@
+http://www.sanfoundry.com/1000-java-algorithms-problems-programming-examples/
+http://www.java2novice.com/java-interview-programs/
+http://javarevisited.blogspot.in/2011/06/top-programming-interview-questions.html
+http://javarevisited.blogspot.in/2010/10/what-is-deadlock-in-java-how-to-fix-it.html
