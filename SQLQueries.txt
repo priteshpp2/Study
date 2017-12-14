@@ -1,3 +1,83 @@
 http://www.java67.com/2013/04/10-frequently-asked-sql-query-interview-questions-answers-database.html
 
 http://artoftesting.com/interviewSection/sql-queries-for-interview.html
+
+
+PreReq :
+
+	CREATE TABLE employee
+	( id number(5),
+	name char(20),
+	dept char(10),
+	age number(2),
+	salary number(10),
+	location char(10)
+	);
+
+	insert into employee (id, name, dept,age,salary,location) values (1,'Pritesh','Computer',26,25000,'Nagpur');
+	insert into employee (id, name, dept,age,salary,location) values (2,'Amrita','mechanical',27,26000,'Jaipur');
+	insert into employee (id, name, dept,age,salary,location) values (3,'DB','electrical',28,27000,'Pune');
+	insert into employee (id, name, dept,age,salary,location) values (4,'Mukesh','electro',29,28000,'Jalgaon');
+	insert into employee (id, name, dept,age,salary,location) values (5,'Shashi','Computer',28,27000,'Pune');
+	insert into employee (id, name, dept,age,salary,location) values (1,'Pritesh','Computer',26,25000,'Nagpur');
+
+	select * from employee;
+
+
+1.select MAX(Salary) from Employee WHERE Salary NOT IN (select MAX(Salary) from Employee);
+
+2.SELECT dept, MAX(Salary) FROM Employee  GROUP BY dept;
+
+3.select * from employee where salary>26000;
+
+4.select * from employee where name like 'P%';
+
+5.select * from employee where LOWER(name) like 'p%';
+
+//  You can use the following query to select distinct records:
+6.SELECT * FROM employee a WHERE rowid = (SELECT MAX(rowid) FROM employee b WHERE a.id=b.id);
+
+
+
+PreReq :
+
+	create table Department(
+	  deptno number(2,0),
+	  dname  varchar2(14),
+	  loc    varchar2(13),
+	  constraint pk_Department primary key (deptno)
+	);
+
+	CREATE TABLE employee2
+	( empno number(5),
+	name char(20),
+	deptno number(10),
+	age number(2),
+	salary number(10),
+	location char(10),
+	constraint pk_employee2 primary key (empno),
+	constraint fk_deptno foreign key (deptno) references Department (deptno)
+	);
+
+
+	insert into Department
+	values(10, 'ACCOUNTING', 'NEW YORK');
+	insert into Department
+	values(20, 'RESEARCH', 'DALLAS');
+	insert into Department
+	values(30, 'SALES', 'CHICAGO');
+	insert into Department
+	values(40, 'OPERATIONS', 'BOSTON');
+
+
+	insert into employee2 values (1,'Pritesh',10,26,25000,'Nagpur');
+	insert into employee2 values (2,'Amrita','20',27,26000,'Jaipur');
+	insert into employee2 values (3,'DB','30',28,27000,'Pune');
+	insert into employee2 values (4,'Mukesh','40',29,28000,'Jalgaon');
+	insert into employee2 values (5,'Shashi','10',28,27000,'Pune');
+
+4.SELECT deptno, MAX(Salary) FROM Employee2  GROUP BY deptno;
+
+5.SELECT dname, MAX(Salary) FROM Employee2 e RIGHT JOIN Department d ON e.deptno = d.deptno GROUP BY dname;
+
+6.SELECT SYSDATE FROM DUAL as 'Year';
