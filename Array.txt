@@ -1,0 +1,77 @@
+1.
+private static int getMissingNumber(int[] numbers, int totalCount) {
+        int expectedSum = totalCount * ((totalCount + 1) / 2);
+        int actualSum = 0;
+        for (int i : numbers) {
+            actualSum += i;
+        }
+ 
+        return expectedSum - actualSum;
+    }
+
+2.
+check if array contains duplicates in Java
+
+     */
+    public static boolean checkDuplicateUsingAdd(String[] input) {
+        Set tempSet = new HashSet();
+        for (String str : input) {
+            if (!tempSet.add(str)) {
+                return true;
+            }
+        }
+        return false;
+    }
+4.
+put the elements of the second array in the Hashtable and for every element of the first array, check whether it’s present in the hash or not, O/P all those elements from the first array that are not present in the hash table
+
+5.
+ public static void topTwo(int[] numbers) {
+        int max1 = Integer.MIN_VALUE;
+        int max2 = Integer.MIN_VALUE;
+        for (int number : numbers) {
+            if (number > max1) {
+                max2 = max1;
+                max1 = number;
+            } else if (number > max2) {
+                max2 = number;
+            }
+        }
+
+        System.out.println("Given integer array : " + Arrays.toString(numbers));
+        System.out.println("First maximum number is : " + max1);
+        System.out.println("Second maximum number is : " + max2);
+    }
+
+6.
+public static void printPairs(int[] array, int sum) {
+
+        for (int i = 0; i < array.length; i++) {
+            int first = array[i];
+            for (int j = i + 1; j < array.length; j++) {
+                int second = array[j];
+
+                if ((first + second) == sum) {
+                    System.out.printf("(%d, %d) %n", first, second);
+                }
+            }
+
+        }
+    }
+7.
+    public static void largestAndSmallest(int[] numbers) {
+        int largest = Integer.MIN_VALUE;
+        int smallest = Integer.MAX_VALUE;
+        for (int number : numbers) {
+            if (number > largest) {
+                largest = number;
+            } else if (number < smallest) {
+                smallest = number;
+            }
+        }
+
+        System.out.println("Given integer array : " + Arrays.toString(numbers));
+        System.out.println("Largest number in array is : " + largest);
+        System.out.println("Smallest number in array is : " + smallest);
+    }
+

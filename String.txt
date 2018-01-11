@@ -1,0 +1,250 @@
+1.Palindrom
+
+import java.util.Scanner;
+ 
+class ChkPalindrome
+{
+   public static void main(String args[])
+   {
+      String str, rev = "";
+      Scanner sc = new Scanner(System.in);
+ 
+      System.out.println("Enter a string:");
+      str = sc.nextLine();
+ 
+      int length = str.length();
+ 
+      for ( int i = length - 1; i >= 0; i-- )
+         rev = rev + str.charAt(i);
+ 
+      if (str.equals(rev))
+         System.out.println(str+" is a palindrome");
+      else
+         System.out.println(str+" is not a palindrome");
+ 
+   }
+}
+
+2.remove any given character from a String // count occurrence of a given character in a string
+
+public class RemoveCharFromString {
+
+    public static void main (String [] t) {
+       
+    	 System.out.println (removeCharInString ("My name is naulej kumar yadav",  'a'));
+    
+       }
+
+      public static String removeCharInString (String string, char charToBeRemoved) {
+
+        if (string == null)
+             return "";
+
+       
+    	    StringBuilder strBuild = new StringBuilder ();
+
+        for (int i = 0; i < string.length (); i++) {
+            char chr = string.charAt (i);
+            if (chr == charToBeRemoved)
+                continue;
+            strBuild.append (chr);
+        }
+        return strBuild.toString ();
+    }
+}
+
+3.permuteString recursive way
+
+public class MainClass {
+  public static void main(String args[]) {
+    permuteString("", "String");
+  }
+
+  public static void permuteString(String beginningString, String endingString) {
+    if (endingString.length() <= 1)
+      System.out.println(beginningString + endingString);
+    else
+      for (int i = 0; i < endingString.length(); i++) {
+        try {
+          String newString = endingString.substring(0, i) + endingString.substring(i + 1);
+
+          permuteString(beginningString + endingString.charAt(i), newString);
+        } catch (StringIndexOutOfBoundsException exception) {
+          exception.printStackTrace();
+        }
+      }
+  }
+}
+
+4.Longest Palindrome
+
+public class LongestPalindromeFinder {
+
+	public static void main(String[] args) {
+		System.out.println(longestPalindromeString("1234"));
+		System.out.println(longestPalindromeString("12321"));
+		System.out.println(longestPalindromeString("9912321456"));
+		System.out.println(longestPalindromeString("9912333321456"));
+		System.out.println(longestPalindromeString("12145445499"));
+		System.out.println(longestPalindromeString("1223213"));
+		System.out.println(longestPalindromeString("abb"));
+	}
+
+	static public String intermediatePalindrome(String s, int left, int right) {
+		if (left > right) return null;
+		while (left >= 0 && right < s.length()
+				&& s.charAt(left) == s.charAt(right)) {
+			left--;
+			right++;
+		}
+		return s.substring(left + 1, right);
+	}
+
+	// O(n^2)
+	public static String longestPalindromeString(String s) {
+		if (s == null) return null;
+		String longest = s.substring(0, 1);
+		for (int i = 0; i < s.length() - 1; i++) {
+			//odd cases like 121
+			String palindrome = intermediatePalindrome(s, i, i);
+			if (palindrome.length() > longest.length()) {
+				longest = palindrome;
+			}
+			//even cases like 1221
+			palindrome = intermediatePalindrome(s, i, i + 1);
+			if (palindrome.length() > longest.length()) {
+				longest = palindrome;
+			}
+		}
+		return longest;
+	}
+}
+
+5.count occurrence of characters in a String
+    import java.util.HashMap;
+    import java.util.Scanner;
+    public class Main {
+        public static void main(String[] args) {
+            String line;
+            int value;
+            Scanner sc = new Scanner(System.in);
+            HashMap<Character,Integer> map = new HashMap<Character,Integer>();
+            System.out.println("Enter a String :");
+            line = sc.nextLine();
+            for (int i=0; i<line.length(); i++){
+                if(map.containsKey(line.charAt(i))){
+                    value = map.get(line.charAt(i));
+                    value ++;
+                    map.put(line.charAt(i),value);
+                }else{
+                    map.put(line.charAt(i),1);
+                }
+            }
+            for ( Character key : map.keySet()){
+                System.out.println("Character : '"+key+"' Count :"+map.get(key));
+            }
+        }
+    }
+6.Anagram
+   String s1 = "cat";
+    String s2 = "tac";
+    boolean isAnagram = false;
+    if (s1.length() == s2.length()) {
+        char[] s1AsChar = s1.toCharArray();
+        char[] s2AsChar = s2.toCharArray();
+        Arrays.sort(s1AsChar);
+        Arrays.sort(s2AsChar);
+        isAnagram = Arrays.equals(s1AsChar, s2AsChar);
+    }
+
+7.String to int
+String number = "10";
+int result = Integer.parseInt(number);
+System.out.println(result);
+
+8.remove special characters from a string in Java?
+public class Main {
+ 
+    public static void main(String[] args) {
+        String str="gasd@!dfas%";
+        String newStr="";
+          for (int i=0;i<str.length();i++)
+          {
+              //Ascci range for a-z A-Z
+              if (str.charAt(i)>64&&str.charAt(i)<121)
+              {
+                    newStr+=str.charAt(i);
+              }
+          }
+ 
+         System.out.println("String before filter "+str);
+        System.out.println("String after filter "+newStr);
+ 
+    }
+ 
+}
+
+9.FirstNonRepeatedChar
+public static char getFirstNonRepeatedChar(String str) {
+        Map<Character,Integer> counts = new LinkedHashMap<>(str.length());
+        
+        for (char c : str.toCharArray()) {
+			if(counts.containsKey(c))
+			{
+				int value = counts.get(c);
+				counts.put(c,value+1);
+			}
+			else
+				counts.put(c,1);
+        }
+        
+        for (Entry<Character,Integer> entry : counts.entrySet()) {
+            if (entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+
+    }
+10.Remove dulplicate characters in string
+ 
+Way1: 
+String string = "aabbccdefatafaz";
+
+char[] chars = string.toCharArray();
+Set<Character> charSet = new LinkedHashSet<Character>();
+for (char c : chars) {
+    charSet.add(c);
+}
+
+StringBuilder sb = new StringBuilder();
+for (Character character : charSet) {
+    sb.append(character);
+}
+System.out.println(sb.toString());
+
+
+Way2:
+public static void main(String[] args) {
+		String stringWithDuplicates = "afsjeadrffafvgdefeverhfgberAAad";
+		char[] characters = stringWithDuplicates.toCharArray();
+		int length = characters.length;
+		System.out.println("String with duplicates : " + stringWithDuplicates);
+	for (int i = 0; i < length; i++) {
+            for (int j = i + 1; j < length; j++) {
+                if (characters[i] == characters[j]) {
+                    int temp = j;//set duplicate element index
+ 
+                    //delete the duplicate element by shifting the elements to left
+                    for (int k = temp; k < length - 1; k++) {
+                    	characters[k] = characters[k + 1];
+                    }
+                    j--;
+                    length--;//reduce char array length
+ 
+                }
+            }
+        }
+	String stringWithOutDuplicates = new String(characters);
+	stringWithOutDuplicates = stringWithOutDuplicates.substring(0, length);
+	System.out.println("String after duplicates removed : " + stringWithOutDuplicates);
+}

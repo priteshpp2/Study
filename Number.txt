@@ -1,0 +1,187 @@
+2.
+  private static boolean isPalindrome(int number) {
+        if(number == reverse(number)){
+            return true;
+        }
+        return false;
+    }
+ 
+     
+    private static int reverse(int number){
+        int reverse = 0;
+     
+        while(number != 0){
+          reverse = reverse*10 + number%10;
+          number = number/10;
+        }
+             
+        return reverse;
+    }
+3.
+private static boolean isArmStrong(int number) {
+        int result = 0;
+        int orig = number;
+        while(number != 0){
+            int remainder = number%10;
+            result = result + remainder*remainder*remainder;
+            number = number/10;
+        }
+        //number is Armstrong return true
+        if(orig == result){
+            return true;
+        }
+      
+        return false;
+    } 
+
+4.
+    public static void main(String args[]) {
+     
+     //get input till which prime number to be printed
+      System.out.println("Enter the number till which prime number to be printed: ");
+      int limit = new Scanner(System.in).nextInt();
+   
+      //printing primer numbers till the limit ( 1 to 100)
+      System.out.println("Printing prime number from 1 to " + limit);
+      for(int number = 2; number<=limit; number++){
+          //print prime numbers only
+          if(isPrime(number)){
+              System.out.println(number);
+          }
+      }
+
+    }
+
+    /*
+     * Prime number is not divisible by any number other than 1 and itself
+     * @return true if number is prime
+     */
+    public static boolean isPrime(int number){
+        for(int i=2; i<number; i++){
+           if(number%i == 0){
+               return false; //number is divisible so its not prime
+           }
+        }
+        return true; //number is prime now
+    }
+}
+
+5.
+public static void main(String args[]) {
+    
+       //input to print Fibonacci series upto how many numbers
+        System.out.println("Enter number upto which Fibonacci series to print: ");
+        int number = new Scanner(System.in).nextInt();
+      
+        System.out.println("Fibonacci series upto " + number +" numbers : ");
+        //printing Fibonacci series upto number
+        for(int i=1; i<=number; i++){
+            System.out.print(fibonacci2(i) +" ");
+        }
+  
+    
+    } 
+    /*
+     * Java program for Fibonacci number using recursion.
+     * This program uses tail recursion to calculate Fibonacci number for a given number
+     * @return Fibonacci number
+     */
+    public static int fibonacci(int number){
+        if(number == 1 || number == 2){
+            return 1;
+        }
+      
+        return fibonacci(number-1) + fibonacci(number -2); //tail recursion
+    }
+  
+  /*
+     * Java program to calculate Fibonacci number using loop or Iteration.
+     * @return Fibonacci number
+     */
+    public static int fibonacci2(int number){
+        if(number == 1 || number == 2){
+            return 1;
+        }
+        int fibo1=1, fibo2=1, fibonacci=1;
+        for(int i= 3; i<= number; i++){
+           
+            //Fibonacci number is sum of previous two Fibonacci number
+            fibonacci = fibo1 + fibo2;             
+            fibo1 = fibo2;
+            fibo2 = fibonacci;
+          
+        }
+        return fibonacci; //Fibonacci number
+      
+    }   
+  
+}
+
+6.
+ /*
+     * Java function to check if an integer is a binary number or not.
+     */
+    public static boolean isBinary(int number) {
+        int copyOfInput = number;
+
+        while (copyOfInput != 0) {
+            if (copyOfInput % 10 > 1) {
+                return false;
+            }
+            copyOfInput = copyOfInput / 10;
+        }
+        return true;
+    }
+9.
+public static int sumOfDigits(int number){
+        if(number/10 == 0) return number;
+       
+        return number%10 + sumOfDigits(number/10);
+    }
+   
+    public static int sumOfDigitsIterative(int number){
+        int result  = 0;
+        while(number != 0){
+            result = result + number%10;
+            number = number/10;
+        }
+       
+        return result;
+    }
+10.
+nt a = 10;
+int b = 20;
+
+System.out.println("value of a and b before swapping, a: " + a +" b: " + b);
+
+//swapping value of two numbers without using temp variable
+a = a+ b; //now a is 30 and b is 20
+b = a -b; //now a is 30 but b is 10 (original value of a)
+a = a -b; //now a is 20 and b is 10, numbers are swapped
+
+12.
+public static Set<Integer> primeFactors(long number) {
+        Set<Integer> primefactors = new HashSet<>();
+        long copyOfInput = number;
+
+        for (int i = 2; i &lt;= copyOfInput; i++) {
+            if (copyOfInput % i == 0) {
+                primefactors.add(i); // prime factor
+                copyOfInput /= i;
+                i--;
+            }
+        }
+        return primefactors;
+    }
+13.
+public static int addIterative(int a, int b){  
+
+        while (b != 0){
+            int carry = (a & b) ; //CARRY is AND of two bits
+          
+            a = a ^b; //SUM of two bits is A XOR B
+          
+            b = carry << 1; //shifts carry to 1 bit to calculate sum
+        }
+        return a;
+ }

@@ -2,3 +2,69 @@ http://www.sanfoundry.com/1000-java-algorithms-problems-programming-examples/
 http://www.java2novice.com/java-interview-programs/
 http://javarevisited.blogspot.in/2011/06/top-programming-interview-questions.html
 http://javarevisited.blogspot.in/2010/10/what-is-deadlock-in-java-how-to-fix-it.html
+
+
+String:
+1.Write code to check a String is palindrome or not
+2.Write a method which will remove any given character from a String?
+3.Print all permutation of String both iterative and Recursive way?
+4.Write a function to find out longest palindrome in a given string?
+5.How to count occurrence of characters in a String?
+6.How to check if two String are Anagram?
+7.How to convert numeric String to int in Java?
+8.How to remove special characters from a string in Java?
+9.How to find first non repeated character of a given String?
+
+Array:
+1.In an array 1-100 numbers are stored, one number is missing how do you find it?
+2.In an array 1-100 exactly one number is duplicate how do you find it?
+3.
+4. Given two arrays, 1,2,3,4,5 and 2,3,1,0,5 find which number is not present in the second array.// Or common beteen two array
+5. How do you find second highest number in an integer array?
+6. How to find all pairs in array of integers whose sum is equal to given number?
+7.How to remove duplicate elements from array in Java?
+8. How to find largest and smallest number in array?
+9. How to find top two maximum number in array?
+
+DS:
+1.Write a program to sort numbers in place using quick sort ?
+2.Write a program to implement binary search algorithm in Java or C++?
+3.Write code to implement Insertion Sort in Java?
+4.Write code to implement Bubble Sort in Java?
+5.How do you find middle element of a linked list in single pass?
+6.How do you find 3rd element from last in single pass? 
+7.How do you find if there is any loop in singly linked list? How do you find the start of the loop? 
+8.How do you reverse a singly linked list? 
+
+Numbers:
+1.Write code to check whether a no is power of two or not? 
+2.Write a program to check whether a number is palindrome or not? 
+3.Write code to check whether an integer is Armstrong number or not? 
+4.Write a program to find all prime number up to a given numbers? 
+5.Write function to compute Nth Fibonacci number? Both iterative and recursive? 
+6.How to check if a number is binary? covert binary to decimal
+7.
+8. 
+9.How to find sum of digits of a number using recursion? 
+10.How to swap two numbers without using temp variable? 
+11.
+12.Write a program to find prime factors of integer? 
+13.How to add two integer without using arithmetic operator? 
+
+
+Others:
+1.SingletonClass
+2.implement hashcode and equals method
+
+Collection:
+1.How do you sort Java object using Comparator? (answer)
+2.WAP to sort map by value.
+
+Multithreading:
+1.WAP to create deadlock between two threads
+2.wait notify notifyall (producer consumer problem)
+3.synchonised method
+4.static synchonization
+
+Spring:
+inject list set or map into spring bean
