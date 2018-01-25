@@ -51,3 +51,42 @@ https://dzone.com/articles/java-classnotfoundexception-vs-noclassdeffounderro
 13.Internal Working of hashmap
 https://dzone.com/articles/how-hashmap-works-in-java
 14.hashcode and equals method
+
+15. can we clone the objects using clone method without implementing clonable interface?
+No.
+
+16.difference between :list l new arraylist vs arraylist l new arraylist
+
+:The main reason you'd do this is to decouple your code from a specific implementation of the interface. When you write your code like this:
+
+List list = new ArrayList();  
+
+the rest of your code only knows that data is of type List, which is preferable because it allows you to switch between different implementations of the List interface with ease.
+
+For instance, say you were writing a fairly large 3rd party library, and say that you decided to implement the core of your library with a LinkedList. If your library relies heavily on accessing elements in these lists, then eventually you'll find that you've made a poor design decision; you'll realize that you should have used an ArrayList (which gives O(1) access time) instead of a LinkedList (which gives O(n) access time). Assuming you have been programming to an interface, making such a change is easy. You would simply change the instance of List from,
+
+List list = new LinkedList();
+to
+List list = new ArrayList();  
+
+17.Internal working of Hashset
+18.Internal Working of treeset
+19.Internal Working of ArrayList
+
+20. How singleton scope works in spring?
+
+21. diffence between http and https ? how to implement https on server?
+
+22. difference between put and post?  put and get ? get and post ?
+
+23.What is the difference between "text" and new String("text")? vs StringBuffer? use of intern method
+
+String literal = "abc"; String object = new String("abc").intern(); 
+		 System.out.println(literal == object); // true
+		 
+		 String literal = "abc"; String object = new String("abc"); 
+		 System.out.println(literal == object); // false
+
+24.can we call destroy method from service method in servlet
+
+25.how to manage session in Restful web services?
