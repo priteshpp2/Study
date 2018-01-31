@@ -25,7 +25,11 @@ You’re given 2 eggs.
 Find N
 -14,27,39,50,60,69,77,84,90,95,99,100
 11.Probability of having boy - 1:1
-12.Piretes and goldcoin
+
+
+12.
+
+
 13.People are waiting in line to board a 100-seat airplane. Steve is the first person in the line. He gets on the plane but suddenly can’t remember what his seat number is, so he picks a seat at random. After that, each person who gets on the plane sits in their assigned seat if it’s available, otherwise they will choose an open seat at random to sit in.
 The flight is full and you are last in line. What is the probability that you get to sit in your assigned seat?
 -1/2
@@ -43,4 +47,45 @@ pounds.
 -warm
 18.Connect every house with every well without the lines intersecting.
 - create rectangle
-19.
+19.Three cannibals and three anthropologists have to cross a river. the boat they have is only big enough for two people. if at any point in time there are more cannibals on one side of the river than anthropologists, the cannibals will eat them. what plan can the anthropologists use for crossing the river so they don’t get eaten?
+
+remember! the boat can’t cross the river by itself, someone has to be in it to row it across.
+-11 times aana jana
+20.100 people standing in a circle in an order 1 to 100. No.1 has a sword. He kills next person (i.e. no. 2) and gives sword to next to next (i.e no.3). All person does the same until only 1 survives. Which number survives at the last?
+-73
+21.Using only a Four-minute hourglass and a seven-minute hourglass,
+How will you measure exactly nine minutes?
+
+Restriction:- Without the process taking longer than nine minutes.
+22.You have 8 balls all of the same size. 7 of them weigh the same, and one of them weighs slightly more.
+How can you find the ball that is heavier by using a balance and only two weighings?
+-divide into two groups
+23.A shell is tied to the side of a boat.
+The shell hangs 3 metres above water level.
+The water rises 2cm an hour.
+24.How much time will it take before water touches the shell?
+-Never 
+25.An investor trading through a discount stock broker that charges $10.00 Dollars per transaction bought 200 shares of Vola Tile Corporation at $50.00 Dollars per share. The stock quickly increased in value by 50%, but then lost 40% of its value. The investor sold the stock. How much money did the investor gain or lose?
+-1020
+26.At a party, everyone shook hands with everybody else. There were 66 handshakes. How many people were at the party?
+-12
+27.You’re on a game show, and you’re given the choice of three doors: Behind one door is a car; behind the others, goats. You pick a door, say No. 1, and the host, who knows what’s behind the doors, opens another door, say No. 3, which has a goat. He then says to you, “Do you want to pick door No. 2?” Is it to your advantage to switch your choice?
+
+With you switch or stay with your door?
+28.You along with your friend are standing in front of two houses. Each of those houses inhabits a family with two children.
+Your friend tells you the below two facts:
+1) On your left is a family that has a boy who likes accounts but the other child loves science.
+2) On the right is a family with a seven year old boy and a new born baby.
+You ask him, “Does either of the family have a girl?”
+To this he replies, “I am not quite sure. But can you guess that? If you are right, I will give you $200.”
+Which family do you think is likely to have a girl ?
+29.red blue 50-50 marbles
+
+
+
+
+
+
+
+Six pirates and Gold Coin puzzle
+five pirates and Gold Coin puzzle
