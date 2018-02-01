@@ -1,3 +1,32 @@
+ 1.What is HTTP Basic Authentication and how it works?
+-https://www.java2novice.com/restful-web-services/http-basic-authentication/
+-https://stackoverflow.com/questions/26777083/best-practice-for-rest-token-based-authentication-with-jax-rs-and-jersey
+LDAP VALIDATION -http://helpdesk.objects.com.au/java/an-example-of-simple-ldap-authentication
+
+and these annotations for security :
+@PermitAll, @DenyAll or @RolesAllowed. from : import javax.annotation.security.RolesAllowed;
+
+2.How do you configure RESTFul web service?
+
+Read more: http://www.java67.com/2015/09/top-10-restful-web-service-interview-questions-answers.html#ixzz55qQdTwUz
+
+-http://www.vogella.com/tutorials/REST/article.html
+-https://www.tutorialspoint.com/restful/restful_first_application.htm
+
+-https://java2blog.com/restful-web-services-jaxrs-crud-example/
+or
+-https://o7planning.org/en/11207/simple-crud-example-with-java-restful-web-service
+
+3.how to use only HTTPS protocol so that your whole communication is always encrypted.
+-https://www.digicert.com/ssl-certificate-installation-tomcat.htm
+-https://dzone.com/articles/setting-ssl-tomcat-5-minutes
+
+4.difference between put and post
+http://javarevisited.blogspot.in/2016/10/difference-between-put-and-post-in-restful-web-service.html#axzz55qe5Ijdl
+https://stackoverflow.com/questions/107390/whats-the-difference-between-a-post-and-a-put-http-request
+
+
+ 
  1) What is REST and RESTful web services ?
  Anyway REST stands for REpresentational State Transfer (REST) its a relatively new concept of writing web services which enforces a stateless client server design where web services are treated as resource and can be accessed and identified by there URL unlike SOAP web services which were defined by WSDL.
 
