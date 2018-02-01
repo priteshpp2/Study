@@ -75,8 +75,11 @@ List list = new ArrayList();
 
 20. How singleton scope works in spring?
 
-21. diffence between http and https ? how to implement https on server?
-
+21. How BST works? Implementaion?
+- Inorder - LDR
+- Preorder- DLR
+- Posorder -LRD
+-https://javabeat.net/binary-search-tree-traversal-java/
 22. difference between put and post?  put and get ? get and post ?
 
 23.What is the difference between "text" and new String("text")? vs StringBuffer? use of intern method
@@ -89,4 +92,4 @@ String literal = "abc"; String object = new String("abc").intern();
 
 24.can we call destroy method from service method in servlet
 
-25.how to manage session in Restful web services?
+25.
