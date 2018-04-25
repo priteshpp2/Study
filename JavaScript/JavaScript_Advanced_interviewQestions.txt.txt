@@ -1,0 +1,137 @@
+
+
+read all the interview questions from this link
+http://www.techbeamers.com/javascript-interview-questions-answers/#q10
+
+
+1.What is a “closure” in JavaScript? Provide an example
+
+A closure is a function defined inside another function (called the parent function), and has access to variables that are declared and defined in the parent function scope.
+
+The closure has access to variables in three scopes:
+
+Variables declared in their own scope
+Variables declared in a parent function scope
+Variables declared in the global namespace
+
+Here is an example:
+
+var globalVar = "xyz";
+
+(function outerFunc(outerArg) {
+    var outerVar = 'a';
+    
+    (function innerFunc(innerArg) {
+    var innerVar = 'b';
+    
+    console.log(
+        "outerArg = " + outerArg + "\n" +
+        "innerArg = " + innerArg + "\n" +
+        "outerVar = " + outerVar + "\n" +
+        "innerVar = " + innerVar + "\n" +
+        "globalVar = " + globalVar);
+    
+    })(456);
+})(123);
+
+2.What will be the output of the following code:
+
+for (var i = 0; i < 5; i++) {
+	setTimeout(function() { console.log(i); }, i * 1000 );
+}
+Explain your answer. How could the use of closures help here?
+
+The code sample shown will not display the values 0, 1, 2, 3, and 4 as might be expected; rather, it will display 5, 5, 5, 5, and 5.
+
+The reason for this is that each function executed within the loop will be executed after the entire loop has completed and all will therefore reference the last value stored in i, which was 5.
+
+Closures can be used to prevent this problem by creating a unique scope for each iteration, storing each unique value of the variable within its scope, as follows:
+
+for (var i = 0; i < 5; i++) {
+    (function(x) {
+        setTimeout(function() { console.log(x); }, x * 1000 );
+    })(i);
+}
+This will produce the presumably desired result of logging 0, 1, 2, 3, and 4 to the console.
+
+In an ES2015 context, you can simply use let instead of var in the original code:
+
+for (let i = 0; i < 5; i++) {
+	setTimeout(function() { console.log(i); }, i * 1000 );
+}
+
+
+4.Functional Programming vs Object Oriented Programming
+
+5. What are two-way data binding and one-way data flow, and how are they different?
+Two way data binding means that UI fields are bound to model data dynamically such that when a UI field changes, the model data changes with it and vice-versa.
+One way data flow means that the model is the single source of truth. Changes in the UI trigger messages that signal user intent to the model (or “store” in React). Only the model has the access to change the app’s state. The effect is that data always flows in a single direction, which makes it easier to understand.
+
+6. What is asynchronous programming, and why is it important in JavaScript?
+Synchronous programming means that, barring conditionals and function calls, code is executed sequentially from top-to-bottom, blocking on long-running tasks such as network requests and disk I/O.
+
+7.. What is the difference between undefined and not defined in JavaScript?
+
+In JavaScript, if you try to use a variable that doesn't exist and has not been declared, then JavaScript will throw an error var name is not defined and script will stop executing. However, if you use typeof undeclared_variable, then it will return undefined.
+
+ex:
+> var x; // declaring x
+> console.log(x); //output: undefined 
+
+var x; // Declaration
+if(typeof x === 'undefined') // Will return true
+
+console.log(y);  // Output: ReferenceError: y is not defined
+
+typeof undefined == typeof NULL  //returns true (answer is undefined for both)
+typeof null // object
+
+
+What is the drawback of creating true private methods in JavaScript?
+
+One of the drawbacks of creating true private methods in JavaScript is that they are very memory-inefficient, as a new copy of the method would be created for each instance.
+
+var Employee = function (name, company, salary) {
+    this.name = name || "";       //Public attribute default value is null
+    this.company = company || ""; //Public attribute default value is null
+    this.salary = salary || 5000; //Public attribute default value is null
+
+    // Private method
+    var increaseSalary = function () {
+        this.salary = this.salary + 1000;
+    };
+
+    // Public method
+    this.dispalyIncreasedSalary = function() {
+        increaseSlary();
+        console.log(this.salary);
+    };
+};
+
+// Create Employee class object
+var emp1 = new Employee("John","Pluto",3000);
+// Create Employee class object
+var emp2 = new Employee("Merry","Pluto",2000);
+// Create Employee class object
+var emp3 = new Employee("Ren","Pluto",2500);
+Here each instance variable emp1, emp2, emp3 has its own copy of the increaseSalary private method.
+
+So, as a recommendation, don’t use private methods unless it’s necessary.	
+
+****************************
+
+How do you check if an object is an array or not?
+
+if( Object.prototype.toString.call( arrayList ) === '[object Array]' ) {
+    console.log('Array!');
+}
+or
+Array.isArray(arrayList);
+
+--------------
+
+written test questions
+
+https://www.codementor.io/nihantanu/21-essential-javascript-tech-interview-practice-questions-answers-du107p62z
+
+https://www.toptal.com/javascript/interview-questions

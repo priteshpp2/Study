@@ -1,0 +1,280 @@
+Introdunction to JavaScript Develpoers : 
+
+1.java script function is flexible: it support variable argument so if we pass extra parameter then javascipt funtion is just ignored that extra parameter and if function accpets extra argument and if calling function didnt passed then thats undefined.()
+JavaScript not support operator overloading.(V32)
+
+2.we can return empty value. like return; then it returns undefined.
+so if didnt return explicitly then still its return undefined.(V33)
+
+function is object in javascript.
+3.Functions is a value in JavaScript. so we can assign function itself to variable(it dosent mean we assign return value to variable)
+so we can execute function using variable like if variable is s then we can call like s();
+
+4.var s = function(){
+}
+this is anonymous function expression. (In this we create function without name and assign it to variable)
+
+5.Function as Argument : (V36)
+
+example :
+var a = function()
+{
+	console.log("Hello");
+};
+
+var p = function(xyz)
+{
+	xyz();
+};
+
+p(a);
+
+6.Function on Object : (assign function is object properties)
+
+var myObj =
+{
+	"testProp" : true 
+};
+
+myObj.testProp2 = function()
+{
+	console.log("Hi");
+};
+
+myObj.testProp2();
+
+7. This keyword :
+
+var person =
+{
+  "firstName" : "Pritesh" , 
+  "lastName" : "Pawar",
+  "printFunction" : function ()
+  {
+	return person.firstName +  " " + person.lastName ; // 7   --  return this.firstName +  " " + this.lastName 
+  }
+};
+
+var fullName = person.printFunction(); // 9
+console.log (fullName);
+
+var person2 = person;
+
+person = {} ;
+
+console.log ( person2.printFunction());
+
+- //  here how can we use person.firstName and lastname as person object is not yet prepared.
+its because line no 7 is initilized but not executed it executed only when we call line no 9.
+
+- // this is fragaile code beacuse it breaks if we assign object to another object. and its try to refer old object in line no 7.
+thats why we use this.
+
+8. Nested Object Program:
+var person = 
+    {
+      "firstName" : "Pritesh",
+      
+      "address" : 
+      {
+        "state" : "MH"
+      },
+
+      "isFromState" : function (state)
+       {
+          return (this.address.state === state);
+       }
+    };
+
+console.log(person.isFromState("MH"));
+
+9.Default Function Arguments :
+
+-In every function there in as object called arguments. we can check arguments of function using arguments. it will print like :
+Arguments {0:10 , 1:30} - Argumnents is not an array.
+
+- imp point : function is an object
+
+10. Javascript inbuild object : Array
+
+- Array methods: push(500)(add in end) , pop , shift , unshift(500) (add in front)
+
+11.forEach accepts function as argument
+
+ex2:item ,index and array is automatically available for array
+var myArray = [10 , 20 , "Helllo"]
+
+var myfun = function(item)  // item , index , array 
+{
+  console.log("elements is :" + item);
+}
+myArray.forEach(myfun);
+
+
+
+****Scopes & Closures In Depth :
+book : you dont know js kyle simpson
+
+Understanding Scopes :
+1.javascript does not create scopes for blocks.
+javascript has function scope if we declare variable in function we cant get variable outside of function.
+
+2. what and why IIFE?
+Dont create global variables. it will polute global namespace.
+
+when you dont want to create global variables.  Create Function. but in this case we have to call that function.
+but in this case we have created global function. this also polute global namespace.
+
+we can create anonymous function and call it : to soleve global varible and glocal funcion problem.
+ex:
+ 
+ (function()
+ {
+	console.log("HI");
+ })();
+
+THIS IS CALLED 	
+IIFE - IMMEDIATELY INVOKE FUNCTION EXPRESSSION
+
+3.Initilization is possible without declaration and we can use that variable.but we cant use variable without declaration as it will give error. 
+
+4.Global variables associated with the window object. -  all global variables and fucntions are properties of window object.
+
+5.browser runs a Compilation just before interpretation.
+Compilation : compiler doesn't bothered about RHS. compiler creates all variables
+var a = 10;
+function myFn()
+{
+	var b = 20;
+	var c = b;
+	console.log(a + b);
+	d = 100; // 6
+}
+myFn();
+
+what compiler does :
+// global scope : a myFn d
+// myFn scope : b c
+
+interpretation: It looks at the RHS:
+what it does :
+it do the assignment. if interpreter not find something in local scope then it checks in the global scope (if it declared later in the local scope then it will not look into the global scope)
+as d created in the global scope.  javascipt create undeclared varible in global scope. (thats why always use var)
+
+imp: we can use same name variable in outer funcion and inner function and in global and function
+tricy : if variable found in the inner scope it will not take value from outer scope.
+
+Clouser:
+
+
+**************Objects and Prototypes In-depth
+creating objects
+function executing and thid reference
+prototype
+
+1. add new keyword before function calling to make normal function as constructor function. as no class in javascript we use new keyword before function
+ex:
+function fn11(name)
+{ 	//var this = {};
+	this.name = "name";
+	// return this;
+}
+var emp1 = new fn11();
+
+// we cant identify the constructor by looking at the function:
+so for this we can start the name of function with capital letter so others get to knoe that this is constructor
+
+2.if we call this function without new but with this keyword . what is this ??
+ex:
+function fn11(name)
+{ 
+	this.name = "name";
+}
+var emp2 = fn11();
+
+//here emp2 is undefined bcs this function retuns undefined by default.
+
+3. 4 way of creating functions
+
+function foo()
+{
+}
+var obj = {};	
+obj.foo = function ()
+{
+};
+
+a. foo()  // here this refers to global object
+
+b. obj.foo() // here this refers to obj object itself
+
+c. new foo() // here this refers to empty object
+
+d. foo.call({}); // we can specify what object this reference binds to 
+
+
+imp: every function has separate this reference.
+if there is outer and inner funcion still both function have separate this reference
+
+
+
+
+Prototypes:
+ 1.when we create function two objects are created : function object and prototype object/
+ 
+ we can try to acccess these objects like funcionname and funcionname.prototype
+ ex : function foo ()
+ {}
+ 
+ type in console :
+ foo :  you will get object
+ foo.prototype : you will get object
+
+ 2.	when we look up for the property in the fucntion object if its have it return the value if function object dont have property then its look up into prototype object.
+ 
+ why we do this why it creates new prototype object bcs when we create object using new its creates 
+ 
+ when there are multiple objects created from same function using new keyword they all share the same prototype.
+ ex: if employee function is there and there is a prototype for an employee.
+ protoype is shared by all objects if they created from same constructor function
+
+ ex: function employeefun (name)
+ {
+	this.name = name;
+ }
+var emp1 = new employeefun("PP");// emp1 gets the property called __proto__ which points to prototype(also called dunder proto)
+var emp2 = new employeefun("AA");
+
+// so in the above example three objects gets created emp1, emp2 , employeefun.prototype
+employeefun.protoype is shared by all objects if they created from same constructor function
+so if we set any property on employeefun.protoype then we can get that same property from both objects.
+like: employeefun.protoype.sirname = pawar;
+
+then we get that using emp1.sirname;emp2.sirname;
+
+we can create ths property specific to emp1 and emp2 also.
+imp: this lookup happens dynamically at runtime
+not recommended to use dunder proto property.
+	
+
+Object Function :
+
+one global function exist in javascipt called object (with the name object)
+
+one global object exist and it have one property called prototype.
+so every new objects( not created using constructor )dunder property points to prototype of global objects
+
+
+there are two ways to create an object 
+A. var obj1 = {};
+B. var obj2 = new Object();
+	-both the ways are exactly same - we can prove this statement using obj1.__proto__ === obj2.__proto__
+
+	
+- refer behind the scean screenshot
+
+Inheritance In JavaScript***:
+
+refer two screenshots
+
+*******************************8
