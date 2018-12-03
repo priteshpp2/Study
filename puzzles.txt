@@ -85,7 +85,11 @@ Which family do you think is likely to have a girl ?
 
 
 
-
+1.handshake people or how many knockout matches
+2.divide L shape square into 4 pieces http://mathhelpforum.com/geometry/43932-dividing-l-shape-into-4-equal-pieces.html
+3.calculate profit loss Apti wala
+4.how to calculate angle in clock. ex: 11.45 PM means 82.5 degree -- > https://www.mathcelebrity.com/clockangle.php?num=11%3A45&pl=Clock+Angle
+5.A frog is at the bottom of a 30 meter well. Each day he summons enough energy for one 3 meter leap up the well. Exhausted, he then hangs there for the rest of the day. At night, while he is asleep, he slips 2 meters backwards. How many days does it take him to escape from the well?
 
 Six pirates and Gold Coin puzzle
 five pirates and Gold Coin puzzle
