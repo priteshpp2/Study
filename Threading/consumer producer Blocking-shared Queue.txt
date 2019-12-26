@@ -1,0 +1,90 @@
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+/**
+ * Producer Consumer Problem solution using BlockingQueue in Java.
+ * BlockingQueue not only provide a data structure to store data
+ * but also gives you flow control, require for inter thread communication.
+ * 
+ * @author Javin Paul
+ */
+public class ProducerConsumerSolution {
+
+    public static void main(String[] args) {
+        BlockingQueue<Integer> sharedQ = new LinkedBlockingQueue<Integer>();
+        
+        Producer p = new Producer(sharedQ);
+        Consumer c = new Consumer(sharedQ);
+        
+        p.start();
+        c.start();
+    }
+}
+
+class Producer extends Thread {
+    private BlockingQueue<Integer> sharedQueue;
+
+    public Producer(BlockingQueue<Integer> aQueue) {
+        super("PRODUCER");
+        this.sharedQueue = aQueue;
+    }
+
+    public void run() {
+        // no synchronization needed
+        for (int i = 0; i < 10; i++) {
+            try {
+                System.out.println(getName() + " produced " + i);
+                sharedQueue.put(i);
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+}
+
+class Consumer extends Thread {
+    private BlockingQueue<Integer> sharedQueue;
+
+    public Consumer(BlockingQueue<Integer> aQueue) {
+        super("CONSUMER");
+        this.sharedQueue = aQueue;
+    }
+
+    public void run() {
+        try {
+            while (true) {
+                Integer item = sharedQueue.take();
+                System.out.println(getName() + " consumed " + item);
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+Output
+PRODUCER produced 0
+CONSUMER consumed 0
+PRODUCER produced 1
+CONSUMER consumed 1
+PRODUCER produced 2
+CONSUMER consumed 2
+PRODUCER produced 3
+CONSUMER consumed 3
+PRODUCER produced 4
+CONSUMER consumed 4
+PRODUCER produced 5
+CONSUMER consumed 5
+PRODUCER produced 6
+CONSUMER consumed 6
+PRODUCER produced 7
+CONSUMER consumed 7
+PRODUCER produced 8
+CONSUMER consumed 8
+PRODUCER produced 9
+CONSUMER consumed 9
+
+
+Read more: http://www.java67.com/2015/12/producer-consumer-solution-using-blocking-queue-java.html#ixzz4gxz9l2aP
