@@ -1,0 +1,37 @@
+public class MiddleOfList {
+    
+    public String findMiddleOfList() {
+        LinkedListNode tail = new LinkedListNode("data5", null);
+        LinkedListNode node4 = new LinkedListNode("data4", tail);
+        LinkedListNode node3 = new LinkedListNode("data3", node4);
+        LinkedListNode node2 = new LinkedListNode("data2", node3);
+        LinkedListNode head = new LinkedListNode("data1", node2);
+        
+        return findMiddle(head);
+    }
+    
+    private String findMiddle(LinkedListNode head) {
+        LinkedListNode current = head;
+        int length = 0;
+        LinkedListNode middle = head;
+      
+        while(current.nextNode != null){
+            length++;
+            if(length % 2 == 0) {
+                middle = middle.nextNode;
+            }
+            current = current.nextNode;
+        }
+        return middle.data;
+    }
+    
+    private class LinkedListNode {
+        public String data = null;
+        public LinkedListNode nextNode = null;
+        
+        public LinkedListNode(String data, LinkedListNode nextNode) {
+            this.data = data;
+            this.nextNode = nextNode;
+        }
+    }
+}
